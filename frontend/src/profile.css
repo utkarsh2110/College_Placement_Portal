@@ -1,0 +1,78 @@
+.profile--main {
+    background-color: #f1f1f1;
+    width: 70vw;
+    margin: 4ch 10ch;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2em;
+}
+
+
+.profile--img {
+    background-color: white;
+    display: inline-block;
+    border-radius: 50%;
+    margin: 2em 1em;
+}
+
+.profile--details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+    margin: 1em 2em 1em 5em;
+}
+
+.profile--detail p {
+    display: inline;
+    font-size: 18px;
+
+}
+
+.profile--detail {
+    margin-top: 2em;
+}
+
+.profile--btn {
+    display: inline-flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 2em 2em 2em 3em;
+    gap: 1em;
+}
+
+.profile--btn button {
+    width: 12em;
+    height: 2.5em;
+    border-radius: 8px;
+    font-size: 15px;
+    margin-left: 1em;
+}
+
+.profile--btn button:hover {
+    cursor: pointer;
+}
+
+.profile--btn1 {
+    background-color: #8F2E23;
+    color: white;
+    border: 2px solid #8F2E23;
+}
+
+.profile--btn1:hover {
+    background-color: white;
+    color: #8F2E23;
+    border: 2px solid #8F2E23;
+}
+
+.profile--btn2 {
+    background-color: white;
+    color: #8F2E23;
+    border: 2px solid #8F2E23;
+}
+
+.profile--btn2:hover {
+    background-color: #8F2E23;
+    color: white;
+    border: #8F2E23;
+}

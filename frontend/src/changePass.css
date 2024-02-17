@@ -1,0 +1,43 @@
+.changep-main{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    gap: 1em;
+    justify-content: center;
+    border: 2px solid #F1F1F1;
+    height: fit-content;
+    padding: 0 20px 30px 20px;
+    border-radius: 20px;
+    margin: 6em 30ch 0 30ch;
+    background-color: #F8F8F8;
+    box-shadow: 10px 10px 10px "#F8F8F8";
+    font-family: POPPINS, "Arial";
+    height: max-content;
+}
+
+.changePass-h2{
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+    text-transform: none;
+}
+#changePass-btn{
+    font-size: 20px;
+    width: 100%;
+    background-color: #8f2e23;
+}
+#changePass-btn:hover{
+    background-color: white;
+    color: #8f2e23;
+}
+
+.cp-input{
+    position: relative;
+}
+
+#cp-eye-btn{
+    position: absolute;
+    right: 20px;
+    top:15px;
+}

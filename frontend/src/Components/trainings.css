@@ -1,0 +1,14 @@
+.training-template{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    background-color: #e2e2e271;
+    width: fit-content;
+    padding: 16px;
+    border-radius: 15px;
+}
+
+span, .training-info{
+    font-size: 14px;
+}

@@ -1,0 +1,33 @@
+.card-parent{
+    display: flex;
+    flex-direction: column;
+    margin: 4em 35ch;
+    background-color: #fdfbfb8e;
+    border: 2px solid #f4f0f0;
+    height: max-content;
+    border-radius: 7px;
+    box-shadow: 10px 10px 10px #fdfbfb8e;;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 45ch;
+    padding: 10px;
+  
+ 
+   
+}
+.card button{
+    background-color: #8f2e23;
+    font-size: 16px;
+}
+.card button:hover{
+    background-color: #e2e2e2;
+    color: #8f2e23;
+}
+
+#training-header{
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}

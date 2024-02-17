@@ -1,0 +1,96 @@
+.chatbot{
+    position: absolute;
+    bottom: 10vh;
+    right: 0;
+    border-radius: 50%;
+    z-index: 1;
+ }
+ 
+ .chatbot-button
+ {
+     background-color: black;
+     border: 1px solid;
+     border-radius: 50%;
+     padding: 4px 5px 0;
+     width: 6ch;
+
+ }
+ 
+.chatbox{
+    width: 0px;
+    display: none;
+}
+
+.chatbox-btn-clicked{
+    width: 350px;
+    height: 500px;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    z-index: 1;
+}
+
+.chatbot-titlebar
+{
+    background-color: black;
+    color: white;
+    padding: 3px;
+    border-radius: 15px 15px 0 0;
+}
+.btn-x
+{
+    background-color: grey;
+    border-radius: 50%;
+    padding: 0.05% 3%;
+}
+
+#placement-txt{
+    justify-self: start;
+}
+
+.chatbot-titlebar img{
+    margin-top: 7px;
+}
+.chatbot-titlebar ul:last-child{
+    font-size: 20px;
+}
+
+nav ul li{
+    display: inline;
+}
+
+.chatbot-nav ul{
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+}
+
+.chatbot-text
+{   height: 70%;
+    background-color:white;
+    overflow-y: scroll;
+    z-index: 1;
+}
+
+.query-box{
+    display: flex;
+    width: 100%;
+}
+.query-box input
+{
+    width: 100%;
+    height: 30px;
+    margin-left: 5px;
+    padding: 5px;
+    padding-left: 20px;
+    background-color: #e2e2e271;
+    border: 1px #e2e2e2;
+    border-radius: 15px 3px 3px 15px;
+}
+.query-box button
+{
+    border-radius: 0 40% 40% 0%;
+    background-color: #8F2E23;
+    border:5px solid #8F2E23;
+}

@@ -1,0 +1,242 @@
+
+.gender{
+    margin-bottom: 20px;
+}
+
+.content
+{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  
+}
+
+
+
+.bgColor{
+    background-color:#8F2E23;
+    color: white;
+}
+
+
+.menuItem{
+    padding: 20px 20px 20px 40px;
+    border-bottom: 3px solid white;
+    background-color: #F8F8F8;
+}
+
+.form
+{
+    padding: 10px 80px;
+    position: relative;
+}
+
+.course, .gender{
+    width: 100%;
+}
+input, textarea, select
+{
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 9px;
+    border: 1.5px solid black;
+    background-color: white;
+    font-family: POPPINS;
+}
+
+h2{
+    font-size: 18px;
+    margin: 20px 0;
+    color: #8F2E23;
+}
+
+form p{
+    margin-bottom: 10px;
+}
+
+select{
+    font-size: 15px;
+    width: 105%;
+}
+
+.basics
+{
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 5em;
+    row-gap: 2rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.471);
+}
+h3{
+    font-size: 16px;
+    font-weight: 100;
+    margin-bottom: 15px;
+}
+
+.undergrad, .class12, .class10
+{
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5em;
+    margin-bottom: 20px;
+}
+
+
+
+.addInternship, .addProject, .addCerts, .addPORs, .addActivity, .addAcad{
+    padding: 5px 12px;
+    background-color: #fff0ee;
+    border: 1px solid #fff0ee;
+    color:black;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    width: fit-content;
+
+}
+
+.internships, .Projects, .Certificates, .PORs, .extraCurr, .acads{
+    position: relative;
+}
+.InternshipForm, .PORForm
+{
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat (3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5em;
+    row-gap: 1em;
+}
+
+.intern-desc, .por-desc
+{
+    grid-column: span 3;
+    grid-row: span 2;
+}
+
+.add,.del
+{
+    min-width: max-content;
+    padding: 5px 7px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    width: 100px;
+
+}
+
+.del{
+    border: 2px solid #8F2E23;
+    color:#8F2E23;
+    background-color: white;
+    margin-right: 10px;
+}
+
+.add{
+    background-color: #8F2E23;
+    color: white;
+    border: 1px solid #8F2E23;
+}
+
+.buttons{
+    margin-top: 20px;
+    position: absolute;
+    right: -20px;
+}
+
+
+.ProjectForm{
+    display: grid;
+    grid-template-rows: repeat (2, 1fr);
+    grid-template-columns: 2fr 1fr;
+    column-gap: 5em;
+    row-gap: 1em;
+}
+
+.proj-desc
+{
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+
+.CertiForm
+{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 5em;
+}
+
+.SkillsForm
+{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 2em;
+}
+
+.ActForm, .AcadForm{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 5em;
+}
+
+
+.buttons1{
+    margin: 20px 0px;
+    position: absolute;
+    right: 60px;
+}
+
+
+.saveDetails,.submit
+{
+
+    padding: 5px 7px;
+    border-radius: 7px;
+    margin: 70px 0 30px 0;
+    min-width: max-content;
+    width: 150px;
+    font-size: 18px;
+}
+
+
+.saveDetails{
+    border: 2px solid #8F2E23;
+    color:#8F2E23;
+    background-color: white;
+    margin-right: 10px;
+}
+
+.submit{
+    background-color: #8F2E23;
+    color: white;
+    border: 1px solid #8F2E23;
+    
+}
+
+h2{
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+button{
+    cursor: pointer;
+}
+
+
+
+
+.sem-wise-gpa
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5em;
+    row-gap: 1em;
+    margin-bottom: 20px;
+}

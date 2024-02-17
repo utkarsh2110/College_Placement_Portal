@@ -1,0 +1,109 @@
+.menuItem
+{
+    cursor: pointer;
+}
+
+
+
+/* .burger-btn
+{
+    margin: 0 50px 0 20px ;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    cursor: pointer;
+    
+} */
+
+
+.titlebar
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #e2e2e2;
+    height:60px;
+}
+.tbar-right
+{
+    justify-content: flex-end;
+}
+
+
+.tbar-left, .tbar-right{
+    display: flex;
+    align-items: center;
+}
+
+.profile, .logout
+{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logout{
+    padding-right: 40px;
+    margin-left: 2em;
+}
+
+.profile img, .logout img{
+    margin-right: 10px;
+}
+.profile img:hover{
+    transform: rotate(60deg);
+    transition: 0.3s ease-in-out;
+}
+
+.logout img:hover{
+    transform: translateX(10px);
+    transition: 0.3s ease-in-out;
+}
+.nmims-logo{
+   align-self: first baseline;
+   margin-top: 10px;
+   margin-left: 2em;
+}
+
+
+.profile{
+    position: relative;
+}
+
+.hoverMenu{
+    position: absolute;
+    top: 2em;
+    left: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+.nav-ul{
+    list-style-type: none;
+    width: 160px;
+    font-size: 15px;
+    z-index: 100;
+
+}
+.nav-ul li:hover{
+    background-color: #8F2E23;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-ul li{
+    background-color: white;
+    height: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.329);
+    padding: 10px;
+    z-index: 100;
+
+}
+ .nav-ul:first-child
+ {
+    border-radius: 7px 7px 0 0 ;
+ }
+
+ .nav-ul:last-child
+ {
+    border-radius: 0 5px ;
+ }

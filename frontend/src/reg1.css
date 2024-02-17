@@ -1,0 +1,245 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.reg-main{
+
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    font-family: "POPPINS";
+}
+
+.reg-left
+{
+    width: 45%;
+    height: 100vh;
+    background: rgba(3, 16, 50, 0.70);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 1em;
+   
+}
+
+
+.reg-left-img{
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    overflow: hidden;
+}
+
+.reg-left-content
+{
+    z-index: 100;
+    color: white;
+    position: absolute;
+    margin:  10ch;
+    width: max-content;
+    text-align: center;
+}
+
+.reg-left-h1
+{
+    font-size: 40px;
+    color: white;
+}
+
+.reg-left-p
+{
+    font-size: 24px;
+}
+
+
+.reg-login-btn{
+    background-color: white;
+    color: #8F2E23;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 11ch;
+    padding: 7px;
+    border-radius: 5px;
+    border: white;
+    font-size: 18px;
+}
+
+
+.reg-right{
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 6ch auto;
+    width: 45ch;    
+    gap: 1.2em;
+}
+
+
+
+
+.reg-name{
+    display: flex;
+    gap: 4em;   
+}
+
+
+
+
+.reg-right-header{
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+    gap: 4em;
+}
+
+.reg-form-head{
+    font-size: 18px;
+}
+
+.reg-input
+{
+    padding: 8px 0px 8px 15px;
+    border-radius: 8px;
+    border: 2px solid;
+    font-size: 18px;
+}
+
+.reg-input-div{
+    position: relative;
+}
+
+.reg-eye
+{
+    position: absolute;
+    top:10px;
+    right: 0;
+}
+
+
+.reg-button button{
+    width: 37.5ch;
+    padding: 8px 15px;
+    font-size: 20px;
+    background-color: #8F2E23;
+    border-radius: 8px;
+    color: white;
+    border: #8F2E23;
+    margin-top: 1ch;
+}
+.reg-button button:hover{
+    background-color: whitesmoke;
+    color: #8F2E23;
+    border: 2px solid #8F2E23;
+
+}
+
+
+
+
+@media  (max-width: 562px) {
+    
+    .reg-main{
+        flex-direction: column;
+    }
+    .reg-r-back{
+        margin-top: 20px;
+    }
+
+    .reg-left{
+        height: 100%;
+        width: 100%;
+       
+    }
+
+    .reg-left-content
+    {
+        width: 100%;
+        margin: 0;
+        height: 100%;
+    }
+    
+
+    .reg-left-h1
+    {
+        font-size: 30px;
+        margin-top: 10%;
+    
+    }
+
+    .reg-left-img img{
+        width: 100%;
+        object-fit: cover;
+    }
+    .reg-left-p{
+        display: none;
+    }
+
+
+    input{
+        padding:   12px 0px 12px 12px;
+        }
+    .reg-right-h1
+    {
+        font-size: 18px;
+    }
+}
+
+@media  (min-width:563px) and (max-width: 1080px) {
+    .reg-main{
+        flex-direction: column;
+    }
+
+    .reg-left-img img{
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .reg-left{
+        width: 100%;
+        height: 35%;
+        object-fit: cover;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .reg-r-content
+    {
+        width: 65%;
+    }
+    .reg-r-back
+    {
+        margin-top: 20px;   
+    }
+
+    .reg-right
+    {
+        width: 100%;
+        height: 65%;
+    }
+   
+   
+    .reg-input
+    {
+        width: 100%;
+    }
+
+    input{
+        padding:   12px 0px 15px 12px;
+        width: 100%;
+    }
+
+   
+    button{
+        width: 102%;
+    }
+    };
+
+
+
+   
+    
+    
+    

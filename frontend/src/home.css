@@ -1,0 +1,195 @@
+
+
+.main
+{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content
+{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  
+}
+
+
+
+.menu
+{
+    width: 250px;
+    height: 100vh;
+    background-color: #F8F8F8;
+    border-right: 10px solid #F8F8F8;
+    transition: 0.2s;
+}
+
+
+
+.bgColor{
+    background-color:#8F2E23;
+    color: white;
+}
+
+
+.menuItem{
+    padding: 20px 20px 20px 40px;
+}
+
+
+.content--right{
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+h1{
+    text-align: left;
+}
+
+.update
+{
+    background-color: #FFF0EE;
+    padding: 0px 25px 25px 25px;
+    border-radius: 10px;
+    margin-top: 2em;
+}
+
+.doc-verification{
+    padding-top: 10px;
+}
+
+
+.training-heading
+{
+    margin-bottom: 10px;
+    grid-column: 1/-1;
+    
+}
+
+.trainings
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1em;
+}
+
+span{
+    color: #8F2E23;
+    font-weight: 800;
+}
+.training-template
+{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    background-color: #e2e2e271;
+    width: fit-content;
+    padding: 16px;
+    border-radius: 15px;
+}
+
+span, .training-info{
+    font-size: 14px;
+}
+
+
+
+body{
+    position: relative;
+}
+
+
+@media (max-width:900px) {
+    
+    .trainings
+    {
+        
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 1em;
+    }
+
+    .content
+    {
+        position: relative;
+    }
+
+    .menu
+    {
+        position: absolute;
+        z-index: 1;
+    }
+    .change .bar1{
+        transform: translate(0, 0px) 
+    }
+    
+    .change .bar3{
+        transform:  translate(0,0) 
+    }
+    
+    .change .bar2{
+        opacity: 1;
+    }
+    
+    .menu
+    {
+        left: -250px;
+    }
+    .menuSlide
+    {
+        translate: 250px 0px ;
+    }
+    .training-template
+    {
+        width: 95%;
+    }
+    .content
+    {
+        padding: 0px;
+    }
+    .content--right{
+        padding: 60px;
+        width: 100%;
+    }
+}
+
+@media (max-width:600px) {
+    .tbar-right{
+       gap: 25px;
+    }
+    .tbar-right p{
+        display: none;
+     }
+
+  
+}
+/*  Chatbot */
+
+
+
+
+.admin-content--right{
+    margin: 0.3em 3em ;
+}
+
+.admin-details-btn{
+    background-color: #8F2E23;
+    border:5px solid #8F2E23;
+    color: white;
+    border-radius: 5px;
+}
+
+
+.training-heading{
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.title{
+    font-size: 18px;
+}
