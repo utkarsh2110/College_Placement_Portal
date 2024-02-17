@@ -32,18 +32,25 @@ input[type=file]
 {
     border: none;
     width: 100%;
+    outline: none;
 }
 
 
-input[type=button]
+.upload-btn
 {
     background-color: #8F2E23;
     border: 1px solid #8F2E23;
     color: white;
     border-radius: 10px;
     width: 20%;
+    cursor: pointer;
 }
-
+.upload-btn:hover
+{
+    background-color: white;
+    border: 1.5px solid #8F2E23;
+    color: #8F2E23;
+}
 .classes
 {
     display: flex;

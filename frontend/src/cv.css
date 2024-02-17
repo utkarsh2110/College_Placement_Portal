@@ -18,17 +18,12 @@
     color: white;
 }
 
-
-.menuItem{
-    padding: 20px 20px 20px 40px;
-    border-bottom: 3px solid white;
-    background-color: #F8F8F8;
-}
-
-.form
+.cv-form
 {
     padding: 10px 80px;
     position: relative;
+    height: max-content;
+    width: max-content;
 }
 
 .course, .gender{
@@ -41,7 +36,7 @@ input, textarea, select
     border-radius: 9px;
     border: 1.5px solid black;
     background-color: white;
-    font-family: POPPINS;
+  
 }
 
 h2{
@@ -53,6 +48,16 @@ h2{
 form p{
     margin-bottom: 10px;
 }
+
+
+.cv-chatbot{
+    position: sticky;
+    width: fit-content;
+    bottom: 1.5%;
+    float: right;
+    margin-right: -15ch;
+}
+
 
 select{
     font-size: 15px;

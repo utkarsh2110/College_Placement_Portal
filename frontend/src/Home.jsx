@@ -20,6 +20,8 @@ export default function Home() {
         })
 
     },[]);
+    
+    
 
     return(
 
@@ -50,7 +52,7 @@ export default function Home() {
                     <Trainings/>
                 </div>
                 <hr style={{color: "grey", opacity:"0.3"}}/>
-                <Chatbot/>
+                <div className="home-chatbot"><Chatbot/></div>
             </div>
     )
 }

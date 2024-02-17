@@ -5,9 +5,9 @@ import logoutIcon from "../assets/logout.png"
 import "./navbar.css"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
+import Avatar from "@mui/material/Avatar"
 
-export default function Navbar(background) {
-
+export default function Navbar() {
     const navigate = useNavigate();
     
     
@@ -57,7 +57,6 @@ export default function Navbar(background) {
     else{
     return (
         <div className="titlebar">
-
             <div className="tbar-left">
                 <div className="burger-btn" >
                     <div className="bar1"></div>
@@ -74,21 +73,28 @@ export default function Navbar(background) {
             <div className="tbar-right">
 
                 <div className="profile" onClick={menuHover}>
-                    <img src= {gearIcon} height="25px"/>
-                    <p> SETTINGS</p>
+                    {/* <img src= {gearIcon} height="25px"/>
+                    <p> SETTINGS</p> */}
+                    <Avatar sx={{bgcolor: "#8f2e2d"}} children={localStorage.getItem("init")}/>
 
                     <div className="hoverMenu" style={{display: hoverMenu, zIndex: 100}} >
                         <ul className="nav-ul">
                             <li className="nav-li" onClick={()=>{navigate('/profile')}}>View Profile</li>
                             <li className="nav-li" onClick={()=>{navigate('/changePass')}}>Change Password</li>
+                            <li onClick={()=>{
+                                localStorage.setItem("token", "");
+                                window.location='/'
+                                localStorage.setItem("init", "")
+                                }
+                            }><div className="logout">
+                                    <img src={logoutIcon} height="25px" alt="logouticon" />
+                                    <p>Logout</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <div className="logout" onClick={()=>{localStorage.setItem("token", ""); window.location='/'}}>
-                     <img src={logoutIcon} height="25px" alt="logouticon" />
-                    <p>LOGOUT</p>
-                </div>
 
             </div>
 

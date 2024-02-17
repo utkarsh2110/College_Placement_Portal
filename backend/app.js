@@ -6,11 +6,12 @@ const fs = require("fs");
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const { stdin } = require("process");
-const DOMParser = require('xmldom').DOMParser;
-
-
+const multer = require('multer')
 let secret = fs.readFileSync("./secretKey.txt", 'utf-8')
+
+
+
+
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,7 +20,22 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 
+
+
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        return cb(null, '/uploads')
+    },
+    filename: function (req, file, cb){
+        cb(null, "doc")
+    }
+});
+const upload = multer({storage});
+
 // Email sent after registration for placements
+
+
 const sendMail = (email, StudentName)=>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -31,26 +47,24 @@ const sendMail = (email, StudentName)=>{
         let emailData = fs.readFileSync('emailResponse.html', 'utf8'); 
         emailData = emailData.replace("studentname", StudentName);
 
-        
-
-
         var mailOptions = {
         from: 'utkarsh.techmihirnaik@gmail.com',
         to: email,
-        subject: 'Registration for final placements',
+        subject: 'Registration for final placements | NMIMS PlaceComm',
         html: emailData
+        }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
 };
 
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
 
-}
-const recoverPass = (email, pass)=>{
+const recoverPass = (email, name, pass)=>{
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -60,12 +74,17 @@ const recoverPass = (email, pass)=>{
     });
   
 
+    let emailData = fs.readFileSync('passRecover.html', 'utf8'); 
+    emailData = emailData.replace("studentname", name);
+    emailData = emailData.replace("userPassword", pass)
+
     var mailOptions = {
-      from: 'utkarsh.techmihirnaik@gmail.com',
-      to: email,
-      subject: `Password Recovery: ${pass}`,
-      html: {path: 'passRecover.html'}
-    };
+    from: 'utkarsh.techmihirnaik@gmail.com',
+    to: email,
+    subject: 'Password Recovery | NMIMS PlaceComm',
+    html: emailData
+    }
+
     
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
@@ -135,6 +154,9 @@ app.get("/about", userAuthentication, (req, res) => {
     res.sendStatus(200);
 })
 
+app.get("/preparation", userAuthentication, (req, res) => {
+    res.sendStatus(200);
+})
 
 app.post("/register", async (req, res) => {
     const { fname, lname, email, pass, sapid } = req.body;
@@ -150,6 +172,20 @@ app.post("/register", async (req, res) => {
         res.send("Registered Successfully");
     }
 });
+
+app.post('/recoverPass', async(req, res)=>{
+
+    const sapid = req.body.sapid;
+    const std = await Student.findOne({sapid});
+    if(std){
+        const pass = jwt.verify(std.password, secret);
+        recoverPass(std.email, std.firstName + " " + std.lastName,  pass);
+        res.json("Pass Recovery Successfully").send();
+    }
+    else 
+        res.sendStatus(403);
+
+})
 
 
 app.put("/changePass", userAuthentication, async (req, res) => {
@@ -198,7 +234,8 @@ app.post("/login", async (req, res) => {
     const std = await Student.findOne({sapid, password: pass1 });
     if (std) {
         let token = jwt.sign({sapid, pass}, secret);
-        res.json(token);
+        let name = std.firstName[0] + std.lastName[0];
+        res.json({data: token, init: name});
     }
     else
         res.sendStatus(403);
@@ -237,16 +274,15 @@ app.post("./home", userAuthentication, (req, res) => {
     console.log(req.body.query)
 });
 
+app.post("/docs", userAuthentication, upload.single("cv"), (req,res)=>{
+    console.log(req.body)
+    console.log(req.file)
 
+});
 
 var port = 3000;
 app.listen(port, function () {
     console.log("Server started on port " + port);
 });
-
-
-
-
-
 
 

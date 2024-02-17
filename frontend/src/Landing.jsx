@@ -1,10 +1,10 @@
 import "./landing.css"
-import Navbar from "./Components/Navbar"
 import user1 from "./assets/user1.jpg"
 import user2 from "./assets/user2.jpg"
 import company from "./assets/company.webp"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTwitterSquare, faFacebookSquare, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons'
+import nmimsLogo from "./assets/nmims.png"
 
 export default function Landing()
 {
@@ -13,11 +13,11 @@ export default function Landing()
 		<div>
 		<section className="header">
 			<nav>
-				<a href="/"><img src="https://engineering.nmims.edu/images/2a4ca0eeb31e71b312f1df1b25865a8a.png" alt="NMIMS Logo"/></a>
+				<a href="/"><img src={nmimsLogo} alt="NMIMS Logo"/></a>
 				<div className="nav-links" id="navLinks">
 					<i className="fa fa-times" ></i>				
 					<ul>
-						<li><a href="">ABOUT</a></li>
+						<li><a href="/about">ABOUT</a></li>
 						<li><a href="#sch">SCHOOLS</a></li>
 						<li><a href="">CONTACT</a></li>
 						<li><a href="/register">REGISTER</a></li>
@@ -154,7 +154,7 @@ export default function Landing()
 		</div>
 
 		<div className="copyright">
-			<small>&copy; Copyright 2022. Shri Vile Parle Kelavani Mandal (SVKM) All Rights Reserved.</small>
+			<small>&copy; Copyright 2024. Shri Vile Parle Kelavani Mandal (SVKM) All Rights Reserved.</small>
 		</div>
 	</footer>
 

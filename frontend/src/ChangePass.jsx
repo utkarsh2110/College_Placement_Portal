@@ -29,6 +29,7 @@ export default function ChangePass() {
                 "Authorization": "bearer " + localStorage.getItem("token")
             }
         }).then((resp) => {
+            if(!resp.ok) window.location = '/login'
             resp.json().then((data) => {
                 setEmail(data.sapid);
             });

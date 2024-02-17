@@ -1,0 +1,47 @@
+.nf-404{
+    background-image: linear-gradient(#8F2E23,#bb0724);
+    color: #FFFFFF;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.nf-tt{
+    font-size: 13em;
+    text-align: center;
+    display: inline;
+}
+
+.p-tt{
+    font-size: 20px;
+}
+
+.btn-404{
+    font-size: 1.5ch;
+    margin-top: 20px;
+    border-radius: 20px;
+    border:2px solid #bb0724;
+    color: #dc0d2f;
+    background-color: white;
+    margin: 0px 20px 0 70px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 15px;
+    letter-spacing: 0.05cm;
+}
+.btn-404-2{
+    padding: 8px 15px;
+    font-size: 1.5ch;
+    margin-top: 20px;
+    border-radius: 20px;
+   
+    border:2px solid white;
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+    background-color: #bb0724;
+}

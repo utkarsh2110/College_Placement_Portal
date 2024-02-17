@@ -21,8 +21,8 @@ export default function Profile(){
                "Authorization": "bearer " + localStorage.getItem("token")
             }
         }).then((resp)=>{
+            if(!resp.ok) window.location ='/login'
             resp.json().then((data)=>{
-                    console.log(data)
                     setSapid(data.sapid.sapid);
                     setFname(data.sapid.firstName);
                     setLname(data.sapid.lastName);

@@ -4,6 +4,9 @@ import './adminlogin.css'
 import eyeOff from "../src/assets/eye off.png"
 import eyeOn from "../src/assets/eye on.png"
 import { useState } from "react"
+import Modal from "@mui/material/Modal"
+import Box from "@mui/material/Box"
+
 
 export default function Admin_Login() {
     const [eyeImg, seteyeImg] = useState(eyeOff);
@@ -12,6 +15,20 @@ export default function Admin_Login() {
     const [pass, setPass] = useState(null);
 
 
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        p: 4,
+    };
+
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const viewPass = () => {
         seteyeImg(eyeImg == eyeOff ? eyeOn : eyeOff);
         setPassType(eyeImg == eyeOff ? "text" : "password")
@@ -48,22 +65,37 @@ export default function Admin_Login() {
                     <div className="admin-form">
                         <div className="admin-sapid">
                             <p className="admin-form-head">ADMIN ID</p>
-                            <input type="text" className="admin-inputs" name="username" id="username" placeholder="xxxxxx" maxLength="11" onChange ={(e)=>{setId(e.target.value)}} />
+                            <input type="text" className="admin-inputs" name="username" id="username" placeholder="xxxxxx" maxLength="11" onChange={(e) => { setId(e.target.value) }} />
                         </div>
 
 
                         <div className="admin-password">
                             <p className="admin-form-head">PASSWORD</p>
                             <div className="admin-input">
-                                <input type={passType} className="admin-inputs" name="password" placeholder="**********" id="password" 
-                                onChange ={(e)=>{setPass(e.target.value)}} />
+                                <input type={passType} className="admin-inputs" name="password" placeholder="**********" id="password"
+                                    onChange={(e) => { setPass(e.target.value) }} />
                                 <img className="admin-eye" src={eyeImg} width="25px" id="eye-off" onClick={viewPass} />
                             </div>
-                            <p className="admin-text-forgot">Forgot password?</p>
+                            <p className="admin-text-forgot" onClick={handleOpen}>Forgot password?</p>
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description">
+                                <Box sx={style}>
+                                    <div className="modal-title" style={{ display: "flex", gap: '2em', alignItems: "center", marginBottom: '2em' }}>
+                                        <img src={uniPic} alt="" width="40px" />
+                                        <h1 style={{ fontSize: 28 }}>Password Recovery</h1>
+                                    </div>
+                                    <p style={{fontWeight: "bold"}}>Contact the College Admin to get the password</p><br />
+                                    <p style={{fontWeight: "bold", color:"#8F2E23"}}>Contact info:  admin@nmims.in</p> 
+                                    <p style={{fontWeight: "bold",  color:"#8F2E23"}}>Phone no: 012 - XXXXXX</p>
+                                </Box>
+                            </Modal>
                         </div>
 
                         <div className="admin-button">
-                            <button type="submit" name="login-button" style={{ cursor: "pointer" }} onClick = {() => {
+                            <button type="submit" name="login-button" style={{ cursor: "pointer" }} onClick={() => {
 
                                 fetch("http://localhost:3000/admin/login", {
                                     method: "POST",
@@ -86,11 +118,11 @@ export default function Admin_Login() {
                                 })
 
                             }}> LOGIN </button>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
         </div >
     )
 }

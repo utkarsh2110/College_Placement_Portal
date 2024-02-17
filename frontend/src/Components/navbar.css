@@ -44,7 +44,6 @@
 
 .logout{
     padding-right: 40px;
-    margin-left: 2em;
 }
 
 .profile img, .logout img{
@@ -68,12 +67,13 @@
 
 .profile{
     position: relative;
+    right: 20px;
 }
 
 .hoverMenu{
     position: absolute;
-    top: 2em;
-    left: 0;
+    top: 2.5em;
+    right: 0;
     cursor: pointer;
     z-index: 1;
 }

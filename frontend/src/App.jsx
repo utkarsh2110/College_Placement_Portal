@@ -5,7 +5,7 @@ import Home from './Home'
 import LeftMenuBar from './Components/LeftMenuBar'
 import CVBulider from './CVbuilder'
 import Docs from './Docs'
-import Profile from './profile'
+import Profile from './Profile'
 import Landing from './Landing'
 import Login from './Login'
 import ChangePass from './changePass'
@@ -15,7 +15,8 @@ import AddTrainings from '../admin/addTrainings'
 import AdminLeftBar from './Components/AdminLeftbar'
 import Register from './register'
 import About from './About'
-
+import NotFound404 from './Components/NotFound404'
+import Preparation from './Preparation'
 
 function App() {
   
@@ -40,8 +41,9 @@ function App() {
               <Route path='/changePass' element={<ChangePass/>} />
               <Route path='/cvbuilder' element={<CVBulider/>} />
               <Route path='/Docs' element={<Docs/>} />
+              <Route path='/preparation' element={<Preparation/>} />
               <Route path='/Profile' element={<Profile/>} />
-              <Route path='*' element={<h1>404</h1>} />
+              <Route path='*' element={<NotFound404/>} />
           
             </Routes>
           </div> 
