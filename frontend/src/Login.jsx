@@ -8,11 +8,31 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import Modal from "@mui/material/Modal"
 import Box from "@mui/material/Box"
-import { colors } from "@mui/material"
-import Navbar from "./Components/Navbar"
-
+import { useEffect } from "react"
 
 export default function Login() {
+
+    useEffect(()=>{
+        fetch("http://localhost:3000/login",{
+            method: "GET",
+            headers: {
+               "Authorization": "bearer " + localStorage.getItem("token")
+            }
+        }).then((resp)=>{
+            if(resp.ok) window.location = '/home'
+            else{
+            resp.json().then((data)=>{
+                if(data){
+                    window.location('/login')
+                }
+            })
+            };
+            
+        })
+
+    },[]);
+
+
     const [eyeImg, seteyeImg] = useState(eyeOff);
     const [passType, setPassType] = useState("password");
 

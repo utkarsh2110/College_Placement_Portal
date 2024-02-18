@@ -4,6 +4,7 @@ import bg from './assets/background.jpg'
 import about from './assets/about_us.jpg'
 import user2 from './assets/user2.jpg'
 import user1 from './assets/user1.jpg'
+import Footer from './footer'
 
 export default function About()
 {
@@ -45,8 +46,10 @@ export default function About()
 						<img src = ""/>
 					</div>
 					<div className = "content">
+					<div className="content-title">
 						<h4>Laxmikant Narkhede</h4>
 						<h5>Placement Co-ordinator</h5>
+						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do elusmod
 						tempor incididunt ut labore et dolore magna aliqua</p>
 					</div>
@@ -56,8 +59,10 @@ export default function About()
 						<img src = ""/>
 					</div>
 					<div className = "content">
-						<h4>Asha Rawat</h4>
-						<h5>Faculty Co-ordinator</h5>
+						<div className="content-title">
+							<h4>Asha Rawat</h4>
+							<h5>Faculty Co-ordinator</h5>
+						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do elusmod
 						tempor incididunt ut labore et dolore magna aliqua</p>
 					</div>
@@ -67,8 +72,10 @@ export default function About()
 						<img src = ""/>
 					</div>
 					<div className = "content">
+					<div className="content-title">
 						<h4>Dr. Harsh Nair</h4>
 						<h5>President</h5>
+						</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do elusmod
 						tempor incididunt ut labore et dolore magna aliqua</p>
 					</div>
@@ -117,45 +124,7 @@ export default function About()
 
 	{/* <!-- Footer --> */}
 	
-	<footer>
-		<div className="footer-container">
-			<a href="/"><img src="https://engineering.nmims.edu/images/2a4ca0eeb31e71b312f1df1b25865a8a.png"
-					alt="NMIMS Logo"/></a>
-			<div className="footer2">
-				<h4>Campuses</h4>
-				<ul>
-					<li><a href="">Mumbai</a></li>
-					<li><a href="">Bengaluru</a></li>
-					<li><a href="">Shirpur</a></li>
-					<li><a href="">Hyderabad</a></li>
-					<li><a href="">Indore</a></li>
-					<li><a href="">Navi Mumbai</a></li>
-					<li><a href="">Dhule</a></li>
-				</ul>
-			</div>
-	
-			<div className="footer3">
-				<h4>Administration</h4>
-				<ul>
-					<li><a href="">Chancellor</a></li>
-					<li><a href="">Vice Chancellor</a></li>
-					<li><a href="">Faculty & Staff</a></li>
-				</ul>
-			</div>
-			<div className="footer4">
-				<h4>Socials</h4>
-				<li><a href=""><i className="fa fa-brands fa-facebook"></i></a></li>
-				<li><a href=""><i className="fa fa-brands fa-twitter"></i></a></li>
-				<li><a href=""></a><i className="fa fa-brands fa-youtube"></i></li>
-			</div>
-	
-	
-		</div>
-	
-		<div className="copyright">
-			<small>&copy; Copyright 2022. Shri Vile Parle Kelavani Mandal (SVKM) All Rights Reserved.</small>
-		</div>
-	</footer>
+	<Footer></Footer>
 
 </>
 )

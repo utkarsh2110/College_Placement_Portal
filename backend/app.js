@@ -206,12 +206,12 @@ app.put("/changePass", userAuthentication, async (req, res) => {
 
 
 
-app.get("/login", (req, res) => {
-    res.send(200);
+app.get("/login", userAuthentication, (req, res) => {
+    res.sendStatus(200);
 })
 
 app.get("/admin/login", (req, res) => {
-    res.send(200);
+    res.sendStatus(200);
 })
 
 

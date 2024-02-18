@@ -17,6 +17,7 @@ import Register from './register'
 import About from './About'
 import NotFound404 from './Components/NotFound404'
 import Preparation from './Preparation'
+import Contact from './Contact'
 
 function App() {
   
@@ -36,6 +37,7 @@ function App() {
               <Route path='/admin/trainings'element={<AddTrainings/>}/>
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
+              <Route path='/contact' element={<Contact />} />
               <Route path='/about' element={<About />} />
               <Route path='/home' element={<Home />} />
               <Route path='/changePass' element={<ChangePass/>} />
