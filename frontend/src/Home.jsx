@@ -14,9 +14,11 @@ export default function Home() {
                "Authorization": "bearer " + localStorage.getItem("token")
             }
         }).then((resp)=>{
+            if(!resp.ok) window.location = './login'
+            else{
             resp.json().then((data)=>{
-            });
-            
+                })
+            ;}    
         })
 
     },[]);
@@ -52,7 +54,6 @@ export default function Home() {
                     <Trainings/>
                 </div>
                 <hr style={{color: "grey", opacity:"0.3"}}/>
-                <div className="home-chatbot"><Chatbot/></div>
             </div>
     )
 }

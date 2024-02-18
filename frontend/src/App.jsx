@@ -8,7 +8,7 @@ import Docs from './Docs'
 import Profile from './Profile'
 import Landing from './Landing'
 import Login from './Login'
-import ChangePass from './changePass'
+import ChangePass from './ChangePass'
 import AdminHome from  '../admin/admin_home'
 import AdminLogin from '../admin/Admin_login'
 import AddTrainings from '../admin/addTrainings'
@@ -18,13 +18,13 @@ import About from './About'
 import NotFound404 from './Components/NotFound404'
 import Preparation from './Preparation'
 import Contact from './Contact'
+import Chatbot from './chatbot'
 
 function App() {
   
   return (
-    <>
+    <div className='app'>
     <Router>
-          
           <Navbar />
           <div className='content'>
             <LeftMenuBar /> 
@@ -51,8 +51,10 @@ function App() {
           </div> 
           </div>
     </Router>
-
-    </>
+    <div className='app-footer'>
+      <Chatbot/>
+    </div>
+    </div>
   )
 }
 

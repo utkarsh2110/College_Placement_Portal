@@ -7,95 +7,106 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const multer = require('multer')
+
+
+
 let secret = fs.readFileSync("./secretKey.txt", 'utf-8')
-
-
-
-
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use('/files', express.static('files'));
 
 
 
 
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        return cb(null, '/uploads')
+    destination: function (req, file, cb) {
+        cb(null, `./files`)
     },
-    filename: function (req, file, cb){
-        cb(null, "doc")
+    filename: function (req, file, cb) {
+        cb(null, `${req.body.title}.pdf`)
     }
 });
-const upload = multer({storage});
+const upload = multer({ storage });
 
 // Email sent after registration for placements
 
 
-const sendMail = (email, StudentName)=>{
+const sendMail = (email, StudentName) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'utkarsh.techmihirnaik@gmail.com',
-          pass: 'erxi owyv rxbn aggq'
+            user: 'utkarsh.techmihirnaik@gmail.com',
+            pass: 'erxi owyv rxbn aggq'
         }
-      });
-        let emailData = fs.readFileSync('emailResponse.html', 'utf8'); 
-        emailData = emailData.replace("studentname", StudentName);
+    });
+    let emailData = fs.readFileSync('emailResponse.html', 'utf8');
+    emailData = emailData.replace("studentname", StudentName);
 
-        var mailOptions = {
+    var mailOptions = {
         from: 'utkarsh.techmihirnaik@gmail.com',
         to: email,
         subject: 'Registration for final placements | NMIMS PlaceComm',
         html: emailData
-        }
+    }
 
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
 };
 
 
-const recoverPass = (email, name, pass)=>{
+const recoverPass = (email, name, pass) => {
     var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'utkarsh.techmihirnaik@gmail.com',
-        pass: 'erxi owyv rxbn aggq'
-      }
+        service: 'gmail',
+        auth: {
+            user: 'utkarsh.techmihirnaik@gmail.com',
+            pass: 'erxi owyv rxbn aggq'
+        }
     });
-  
 
-    let emailData = fs.readFileSync('passRecover.html', 'utf8'); 
+
+    let emailData = fs.readFileSync('passRecover.html', 'utf8');
     emailData = emailData.replace("studentname", name);
     emailData = emailData.replace("userPassword", pass)
 
     var mailOptions = {
-    from: 'utkarsh.techmihirnaik@gmail.com',
-    to: email,
-    subject: 'Password Recovery | NMIMS PlaceComm',
-    html: emailData
+        from: 'utkarsh.techmihirnaik@gmail.com',
+        to: email,
+        subject: 'Password Recovery | NMIMS PlaceComm',
+        html: emailData
     }
 
-    
-    transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
     });
-    
-    }
+
+}
 // Database: Defining Schemas
+
+const PDFSchema = new mongoose.Schema({
+    pdf: String
+});
+
+const CVSchema = new mongoose.Schema({
+
+    Linkedin: String,
+    Github: String,
+    Languages: String,
+    Age: Number,
+})
 
 const adminSchema = new mongoose.Schema({
     username: String,
@@ -108,9 +119,10 @@ const studentSchema = new mongoose.Schema({
     email: String,
     password: String,
     sapid: Number,
-})
+});
 
-// Database: Model
+// Database: 
+const Doc = mongoose.model('PDFSchema', PDFSchema)
 const Admin = mongoose.model('Admin', adminSchema);
 const Student = mongoose.model('Student', studentSchema);
 
@@ -167,40 +179,40 @@ app.post("/register", async (req, res) => {
     }
     else {
         const newStd = new Student({ firstName: fname, lastName: lname, email: email, password: pass1, sapid: sapid });
-        sendMail(email, fname+" "+lname);
+        sendMail(email, fname + " " + lname);
         await newStd.save();
-        res.send("Registered Successfully");
+        res.sendStatus(200);
     }
 });
 
-app.post('/recoverPass', async(req, res)=>{
+app.post('/recoverPass', async (req, res) => {
 
     const sapid = req.body.sapid;
-    const std = await Student.findOne({sapid});
-    if(std){
+    const std = await Student.findOne({ sapid });
+    if (std) {
         const pass = jwt.verify(std.password, secret);
-        recoverPass(std.email, std.firstName + " " + std.lastName,  pass);
+        recoverPass(std.email, std.firstName + " " + std.lastName, pass);
         res.json("Pass Recovery Successfully").send();
     }
-    else 
+    else
         res.sendStatus(403);
 
 })
 
 
-app.put("/changePass", userAuthentication, async (req, res) => {
-    const {sapid, currPass, newPass } = req.body;
+app.patch("/changePass", userAuthentication, async (req, res) => {
+    const { sapid, currPass, newPass } = req.body;
     let pass = jwt.sign(currPass, secret);
     const std = await Student.findOne({sapid, password: pass });
-    if(std)
-    {
+    if (std) {
         let password = jwt.sign(newPass, secret);
-        const {firstName, lastName, email, sapid} = std;
-        const updated = new Student(firstName, lastName, email, password, sapid);
-        let updatedStd = await Student.updateOne({std},{updated});
+        const { firstName, lastName, email, sapid } = std;
+        const updated = {firstName, lastName, email, password, sapid};
+        let updatedStd = await Student.findOneAndUpdate({sapid}, {password});
         console.log(updatedStd)
         let token = jwt.sign({ sapid, currPass }, secret);
-        res.json(token);}
+        res.json(token);
+    }
 });
 
 
@@ -219,8 +231,8 @@ app.get("/admin/login", (req, res) => {
 app.post("/admin/login", async (req, res) => {
     const { username, password } = req.body;
     const admin = await Admin.findOne({ username, password });
-    if (admin){
-        const token = jwt.sign({username, password}, secret, {expiresIn: '1h'});
+    if (admin) {
+        const token = jwt.sign({ username, password }, secret, { expiresIn: '1h' });
         res.json(token);
     }
     else
@@ -229,13 +241,13 @@ app.post("/admin/login", async (req, res) => {
 
 
 app.post("/login", async (req, res) => {
-    const {sapid, pass} = req.body;
+    const { sapid, pass } = req.body;
     let pass1 = jwt.sign(pass, secret);
-    const std = await Student.findOne({sapid, password: pass1 });
+    const std = await Student.findOne({ sapid, password: pass1 });
     if (std) {
-        let token = jwt.sign({sapid, pass}, secret);
+        let token = jwt.sign({ sapid, pass }, secret);
         let name = std.firstName[0] + std.lastName[0];
-        res.json({data: token, init: name});
+        res.json({ data: token, init: name });
     }
     else
         res.sendStatus(403);
@@ -254,19 +266,37 @@ app.get("/changePass", userAuthentication, (req, res) => {
     })
 })
 app.get("/profile", userAuthentication, async (req, res) => {
-    const std =  await Student.findOne({sapid: req.user.sapid});
+    const std = await Student.findOne({ sapid: req.user.sapid });
     res.json({
         sapid: std
     })
 })
 
-
-app.get("/cvbuilder", userAuthentication, (req, res) => {
-    res.sendStatus(200);
+app.get('/files/:fileName', userAuthentication, (req, res) => {
+    console.log("request rcvd");
+    console.log(fileName = req.params.fileName)
+    const type = fileName.split("_")[1];
+    const file = req.user.sapid + "_" + type;
+    res.json({ url: file });
 })
 
-app.get("/docs", userAuthentication, (req, res) => {
-    res.sendStatus(200);
+
+
+app.get("/cvbuilder", userAuthentication, async (req, res) => {
+    const std = await Student.findOne({ sapid: req.user.sapid });
+    res.json({
+        sapid: std
+    })
+})
+
+app.get("/docs", userAuthentication, async (req, res) => {
+    const std = await Student.findOne({ sapid: req.user.sapid });
+    const {sapid} = std;
+
+    const docs = await Doc.find({ pdf: sapid + ["_cv, _lsm, _hsc, _"] })
+    res.json({
+        sapid
+    })
 })
 
 
@@ -274,9 +304,18 @@ app.post("./home", userAuthentication, (req, res) => {
     console.log(req.body.query)
 });
 
-app.post("/docs", userAuthentication, upload.single("cv"), (req,res)=>{
-    console.log(req.body)
-    console.log(req.file)
+app.post("/docs", userAuthentication, upload.single("file"), async (req, res) => {
+    const pdf = req.body.title;
+    const doc = await Doc.findOne({ pdf });
+    if (!doc) {
+        const newDoc = new Doc({ pdf })
+        await newDoc.save();
+    }
+    else {
+        res.send("Resource Already exists")
+
+    }
+
 
 });
 

@@ -46,7 +46,7 @@ export default function Register() {
                     </div>
                 </div>
 
-
+                
                 <div className="reg-name">
                     <div className="reg-fname">
                         <p className="reg-form-head">FIRST NAME</p>
@@ -100,9 +100,7 @@ export default function Register() {
                             }
                         }).then((resp) => {
                             resp.json().then((data) => {
-                                if (data) {
-                                    window.location = '/login'
-                                }
+                                if(resp.ok) window.location = '/login'
                             });
 
                         })

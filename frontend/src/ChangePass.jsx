@@ -9,7 +9,9 @@ import { useEffect } from 'react';
 
 export default function ChangePass() {
 
-    const [eyeImg, seteyeImg] = useState(eyeOff);
+    const [eyeImg1, seteyeImg1] = useState(eyeOff);
+    const [eyeImg2, seteyeImg2] = useState(eyeOff);
+    const [eyeImg3, seteyeImg3] = useState(eyeOff);
     const [passType1, setPassType1] = useState("password");
     const [passType2, setPassType2] = useState("password");
     const [passType3, setPassType3] = useState("password");
@@ -20,6 +22,18 @@ export default function ChangePass() {
     const [CnfnewPass, setCnfPass] = useState(null);
     const [sapid, setEmail] = useState(null);
 
+    const viewPass1 = () => {
+        seteyeImg1(eyeImg1 == eyeOff ? eyeOn : eyeOff);
+        setPassType1(eyeImg1 == eyeOff ? "text" : "password")
+    }
+    const viewPass2 = () => {
+        seteyeImg2(eyeImg2 == eyeOff ? eyeOn : eyeOff);
+        setPassType2(eyeImg2 == eyeOff ? "text" : "password")
+    }
+    const viewPass3 = () => {
+        seteyeImg3(eyeImg3 == eyeOff ? eyeOn : eyeOff);
+        setPassType3(eyeImg3 == eyeOff ? "text" : "password")
+    }
 
 
     useEffect(() => {
@@ -56,7 +70,8 @@ export default function ChangePass() {
                         autoComplete="current-password"
                         onChange={(e) => { setCurrent(e.target.value) }}
                     />
-                    <img className="eye" src={eyeImg} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} />
+                    <img className="eye" src={eyeImg1} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} onClick={viewPass1}
+                     />
                 </div>
                 <div className="cp-input">
                     <TextField fullWidth
@@ -66,17 +81,17 @@ export default function ChangePass() {
                         autoComplete="current-password"
                         onChange={(e) => { setNewPass(e.target.value) }}
                     />
-                    <img className="eye" src={eyeImg} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} />
+                    <img className="eye" src={eyeImg2} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} onClick={viewPass2} />
                 </div>
                 <div className="cp-input">
                     <TextField fullWidth
                         id="outlined-cnfpassword-input"
                         label="Confirm New Password"
-                        type={passType2}
+                        type={passType3}
                         autoComplete="current-password"
                         onChange={(e) => { setCnfPass(e.target.value) }}
                     />
-                    <img className="eye" src={eyeImg} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} />
+                    <img className="eye" src={eyeImg3} width="25px" id="cp-eye-btn" style={{ cursor: " pointer" }} onClick={viewPass3} />
                 </div>
                 <div className="button">
                     <Button variant="contained" id="changePass-btn" size="medium"
@@ -85,7 +100,7 @@ export default function ChangePass() {
                             if (newPass == CnfnewPass) {
 
                                 fetch("http://localhost:3000/changePass", {
-                                    method: "PUT",
+                                    method: "PATCH",
                                     body: JSON.stringify({
                                         sapid,
                                         currPass,

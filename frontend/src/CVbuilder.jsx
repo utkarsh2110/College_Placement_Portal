@@ -2,7 +2,14 @@ import Chatbot from "./chatbot.jsx"
 import "./cv.css"
 import "./script.js"
 import { useEffect } from "react";
+import { useState } from "react";
 export default function CVBulider() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [age,  setAge] = useState("")
+
+    const [specialisation, setSpec] = useState();
+
     useEffect(()=>{
         fetch("http://localhost:3000/cvbuilder",{
             method: "GET",
@@ -13,8 +20,10 @@ export default function CVBulider() {
             if(!resp.ok) window.location = '/login'
             else{
             resp.json().then((data)=>{
-                if(data.forbidden){
-                    window.location('/login')
+                if(data){
+                    console.log(data.sapid)
+                    setName(data.sapid.firstName + " " + data.sapid.lastName)
+                    setEmail(data.sapid.email)
                 }
             })
             };
@@ -25,19 +34,19 @@ export default function CVBulider() {
     return (
         <div className="cv-form">
 
-            <form action="sdfsf">
+            <form>
 
                 <h2>Basic details</h2>
                 <div className="basics">
 
                     <div className="name">
                         <p>Full Name</p>
-                        <input type="text" name="name" id="name" />
+                        <input type="text" name="name" id="name" value={name}/>
                     </div>
 
                     <div className="email">
                         <p>NMIMS Email</p>
-                        <input type="email" name="email" id="email" />
+                        <input type="email" name="email" id="email" value={email}/>
                     </div>
 
 
@@ -47,7 +56,6 @@ export default function CVBulider() {
                     </div>
 
                     <div className="g-url">
-
                         <p>GitHub URL</p>
                         <input type="url" name="GitHonclickub" id="GitHub" />
                     </div>
@@ -65,10 +73,10 @@ export default function CVBulider() {
 
                     <div className="course">
                         <p>Course</p>
-                        <select name="course" id="course" autoComplete="off">
+                        <select name="course" id="course" autoComplete="off" onChange={e=>{e.target.value}}>
                             <option defaultValue={true} disabled>Select your Course</option>
-                            <option value="btech" id="btech"  >B.Tech</option>
-                            <option value="mbatech" id="mba" >MBA Tech</option>
+                            <option value="btech" id="btech">B.Tech</option>
+                            <option value="mbatech"  id="mba">MBA Tech</option>
                         </select>
                     </div>
 
@@ -93,8 +101,6 @@ export default function CVBulider() {
                     </div>
                     <br />
                 </div>
-
-
 
                 <h2 className="acad">Academic Background</h2>
                 <div className="Academic">
@@ -429,7 +435,6 @@ export default function CVBulider() {
 
             </form>
 
-            <div className="cv-chatbot"><Chatbot /></div>
         </div>
 
 

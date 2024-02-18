@@ -11,7 +11,6 @@ export default function Profile(){
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
 
-
     const navigate = useNavigate();
 
     useEffect(()=>{

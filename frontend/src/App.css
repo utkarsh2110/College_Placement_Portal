@@ -9,4 +9,20 @@
 .content{
     display: flex;
     flex-direction: row;
+  
+}
+.navbar{
+    position: sticky;
+    left: 0;
+}
+
+.app-footer{
+    position: sticky;
+    bottom: 1.5%;
+    margin-right: 20px;
+    float: right;
+}
+.app-main{
+    position: relative;
+    
 }
