@@ -4,11 +4,18 @@ import send from './assets/send.png'
 import { useState } from 'react'
 import down from './assets/down.svg'
 export default function Chatbot() {
+
+    const [bottxt, setBotTxt] = useState(["Hello 👋🏻 I am PlacementPal , How can I assist you today?"])
+
     const [chatbot, viewChatbot] = useState("none")
     const [btnIcon, setbtnIcon] = useState(chabotIcon);
     const [overflow, setOverFlow] = useState("scroll")
     const [prompt, setText] = useState("")
-    const [reply, setReply] = useState (null)
+
+    const [reply, setReply] = useState ([]);
+    const [prompts, setPrompts] = useState([])
+
+   
     const view = () => {
         if (chatbot === "none") {
             viewChatbot("block")
@@ -43,20 +50,26 @@ export default function Chatbot() {
                             </nav>
                         </div>
                         <div className="chatbot-text" id="pbox" style={{ overflowY: overflow }}>
-                            <p className='bot-text'>Hello 👋🏻 I am PlacementPal , How can I assist you today?</p>
-                            <p className='user-text'>Hello</p>
-                            <p className='bot-text'>Hello 👋🏻 I am PlacementPal , How can I assist you today?</p>
-                            <p className='user-text'>{prompt}</p>
-                            <p className='bot-text'>{reply}</p>
+                            {
+                                bottxt.map((e)=>{
+                                    return  <p className='bot-text'>{e}</p>
+                                })
+                            }{
+                                prompts.map((e)=>{
+                                    return  <p className='user-text'>{e}</p>
+                                })
+                            }
                         </div>
                         <div className="query-box">
                             <input type="text" id="utext" placeholder="Enter your query . . ." className='query-input' onChange={(e) => { setText(e.target.value) }} />
                             <button><img src={send} width="20px" onClick={() => {
-                                
                                 if (prompt) {
+                                    setPrompts((prevValue) => [...prevValue, prompt]);
+                                    console.log(prompts)
                                     document.getElementById("utext").setAttribute("value", "");
+        
                                     fetch('http://localhost:3000/chatbot', {
-                                        method: 'POST',
+                                        method: 'get',
                                         body: JSON.stringify({
                                             prompt
                                         }),
@@ -67,6 +80,7 @@ export default function Chatbot() {
                                         resp.json().then(data => {
                                             if(data.reply){
                                                 setReply(data.reply)
+                                                setBotTxt((prev)=>[...prev, data.reply])
                                             }
                                         })
                                     })
