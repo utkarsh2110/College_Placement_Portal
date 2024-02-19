@@ -7,8 +7,12 @@ const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const multer = require('multer')
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+require('dotenv').config();
 
 
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-pro"});
 
 let secret = fs.readFileSync("./secretKey.txt", 'utf-8')
 
@@ -129,13 +133,21 @@ const TrainingSchema = new mongoose.Schema({
     desc: String
 })
 
+const MaterialSchema = new mongoose.Schema({
+    company: String,
+    role: String, 
+    desc: String,
+    type: String,
+    url: String   
+})
+
+
 // Database: 
 const Doc = mongoose.model('PDFSchema', PDFSchema)
 const Admin = mongoose.model('Admin', adminSchema);
 const Student = mongoose.model('Student', studentSchema);
-
-const Training = mongoose.model('Trainings', TrainingSchema)
-
+const Training = mongoose.model('Trainings', TrainingSchema);
+const Material = mongoose.model('Material', MaterialSchema);
 
 // Database: Connection
 mongoose.connect('mongodb+srv://utkash:HNkcstfnDi9RXhH2@cluster0.0cgutry.mongodb.net/NMIMS');
@@ -174,8 +186,12 @@ app.get("/about", userAuthentication, (req, res) => {
     res.sendStatus(200);
 })
 
-app.get("/preparation", userAuthentication, (req, res) => {
-    res.sendStatus(200);
+app.get("/preparation", userAuthentication, async (req, res) => {
+    const materials = await Material.find();
+    res.json({
+        sapid: req.user.sapid,
+        materials
+    })
 })
 
 app.post("/register", async (req, res) => {
@@ -337,6 +353,28 @@ app.post('/admin/trainings', async (req, res)=>{
     }
 });
 
+app.post('/admin/addPrep', async (req, res)=>{
+    const {company, role, desc, type, url} = req.body;
+    const material  = await Material.findOne({company, role, desc, type, url});
+    if(material){
+        res.sendStatus(403);
+    }
+    else{
+        const newMaterial =  new Material({company, role, desc, type, url});
+        await newMaterial.save();
+        res.sendStatus(200);
+    }
+});
+
+
+app.post('/chatbot', async (req, res)=>{
+    const {prompt}  = req.body;
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+    console.log(text)
+    res.json({reply: text});
+})
 
 
 

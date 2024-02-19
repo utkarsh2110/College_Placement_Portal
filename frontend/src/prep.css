@@ -1,0 +1,21 @@
+.prep-box{
+    display: grid;
+}
+
+
+.prep-template{
+    width: fit-content;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    margin: 2em;
+    padding: 10px 15px;
+}
+
+.prep-title h1{
+    font-size: 18px;
+    color: black;
+    margin-bottom: 15px;
+}
+.prep-title p{
+    font-size: 15px;
+}

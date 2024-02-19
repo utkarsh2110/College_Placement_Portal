@@ -37,8 +37,8 @@ export default function AddTrainings() {
                             "Content-Type": "application/json"
                         }
                     }).then((resp)=>{
+                        if(resp.ok) window.location = '/admin/trainings'
                         resp.json().then((data) => {
-                            if(resp.ok) window.location = '/login'
                         });
                 })
             }} >Add</Button>

@@ -70,6 +70,8 @@
     border: 1px solid #e2e2e2;
     z-index: 1;
     border-bottom: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -120,7 +122,9 @@
     max-width: 70%;
     padding: 10px;
     font-size: 14px;
-    float: right;
+    right: 0;
+    display: block;
+    align-self: flex-end;
     text-wrap: wrap;
     background-color: #FFF0EE;
     margin-right: 10px;

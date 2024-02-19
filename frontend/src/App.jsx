@@ -11,7 +11,7 @@ import Login from './Login'
 import ChangePass from './ChangePass'
 import AdminHome from '../admin/admin_home'
 import AdminLogin from '../admin/Admin_login'
-import AddTrainings from '../admin/addTrainings'
+import AddTrainings from '../admin/AddTrainings'
 import AdminLeftBar from './Components/AdminLeftbar'
 import Register from './register'
 import About from './About'
@@ -20,6 +20,7 @@ import Preparation from './Preparation'
 import Contact from './Contact'
 import Chatbot from './chatbot'
 import { useState } from 'react'
+import AddPrep from '../admin/addPrep'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
               <Route path='/admin/login' element={<AdminLogin />} />
               <Route path='/admin/home' element={<AdminHome />} />
               <Route path='/admin/trainings' element={<AddTrainings />} />
+              <Route path='/admin/preparation' element={<AddPrep />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/contact' element={<Contact />} />
