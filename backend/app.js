@@ -121,10 +121,21 @@ const studentSchema = new mongoose.Schema({
     sapid: Number,
 });
 
+const TrainingSchema = new mongoose.Schema({
+    title: String,
+    date: String,
+    venue: String,
+    time: String,
+    desc: String
+})
+
 // Database: 
 const Doc = mongoose.model('PDFSchema', PDFSchema)
 const Admin = mongoose.model('Admin', adminSchema);
 const Student = mongoose.model('Student', studentSchema);
+
+const Training = mongoose.model('Trainings', TrainingSchema)
+
 
 // Database: Connection
 mongoose.connect('mongodb+srv://utkash:HNkcstfnDi9RXhH2@cluster0.0cgutry.mongodb.net/NMIMS');
@@ -153,9 +164,6 @@ app.get("/", (req, res) => {
     res.sendStatus(200);
 })
 app.get("/contact", (req, res) => {
-    res.sendStatus(200);
-})
-app.get("/index", (req, res) => {
     res.sendStatus(200);
 })
 
@@ -254,10 +262,15 @@ app.post("/login", async (req, res) => {
 
 });
 
-app.get("/home", userAuthentication, (req, res) => {
+app.get("/home", userAuthentication, async (req, res) => {
+    
+    const trainings = await Training.find();
     res.json({
-        sapid: req.user.sapid
+        sapid: req.user.sapid,
+        trainings
     })
+
+
 })
 
 app.get("/changePass", userAuthentication, (req, res) => {
@@ -292,17 +305,8 @@ app.get("/cvbuilder", userAuthentication, async (req, res) => {
 app.get("/docs", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid: req.user.sapid });
     const {sapid} = std;
-
-    const docs = await Doc.find({ pdf: sapid + ["_cv, _lsm, _hsc, _"] })
-    res.json({
-        sapid
-    })
 })
 
-
-app.post("./home", userAuthentication, (req, res) => {
-    console.log(req.body.query)
-});
 
 app.post("/docs", userAuthentication, upload.single("file"), async (req, res) => {
     const pdf = req.body.title;
@@ -318,6 +322,23 @@ app.post("/docs", userAuthentication, upload.single("file"), async (req, res) =>
 
 
 });
+
+app.post('/admin/trainings', async (req, res)=>{
+    const {title, date, venue, time, desc} = req.body;
+    console.log(venue)
+    const train  = await Training.findOne({title, date, venue, time, desc});
+    if(train){
+        res.sendStatus(403);
+    }
+    else{
+        const newTraining = new Training({title, date, venue, time, desc});
+        await newTraining.save();
+        res.sendStatus(200);
+    }
+});
+
+
+
 
 var port = 3000;
 app.listen(port, function () {

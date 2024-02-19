@@ -10,6 +10,8 @@ export default function LeftMenuBar() {
             <div className="CVBulider menuItem"  onClick={()=>{navigate('/cvbuilder')}}>CV Builder</div>
             <div className="Docs menuItem" onClick={()=>{navigate('/docs')}}>Documents</div>
             <div className="prep menuItem" onClick={()=>{navigate('/preparation')}} >Preparation</div>
+            <div className="prep menuItem" onClick={()=>{navigate('/ask')}} >Ask Co-ordinator</div>
+            <div className="prep menuItem" onClick={()=>{navigate('/faq')}} >FAQs</div>
         </div>
     )
     }

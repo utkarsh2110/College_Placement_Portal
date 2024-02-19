@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Chatbot from "./chatbot"
 import "./docs.css"
 import { useEffect } from "react";
-import PDFDocs from "./PdfDocs";
+
 
 export default function Docs() {
     const [file, setFile] = useState(null)
@@ -26,8 +25,8 @@ export default function Docs() {
             }
         });
         setFileName(title)
-        setviewBtn("block")
-        setUploadbtn("none")
+        // setviewBtn("block")
+        // setUploadbtn("none")
     };
 
 
@@ -64,22 +63,6 @@ export default function Docs() {
                         <input type="file" id="Upload" name="cv" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}
                             required />
                         <p>{fileName}</p>
-                        <input type="button" name="cv" className="upload-btn"  style ={{display: viewBtn}} onClick={()=>{
-
-                            fetch(`http://localhost:3000/files/${sap}_cv.pdf`,{
-                                 method: "GET",
-                                 headers:  {
-                                    "Authorization": "bearer " + localStorage.getItem("token")
-                                 }
-                            }).then(resp=>{
-                                resp.json().then((data)=>{
-                                    if(!resp.ok) window.location = './login'
-                                    else{
-                                        if(data.url)window.location = data.url
-                                    }
-                                })
-                            })
-                        }} value="VIEW"/>
                         <button type="submit" name="cv" style={{display: upload}} className="upload-btn">UPLOAD</button>
                         
                     </form>

@@ -87,7 +87,7 @@ export default function Navbar() {
                                 localStorage.setItem("init", "")
                                 }
                             }><div className="logout">
-                                    <img src={logoutIcon} height="25px" alt="logouticon" />
+                                    {/* <img src={logoutIcon} height="25px" alt="logouticon" /> */}
                                     <p>Logout</p>
                                 </div>
                             </li>

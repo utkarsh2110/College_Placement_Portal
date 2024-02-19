@@ -5,6 +5,7 @@ import { useState } from 'react'
 export default function Chatbot() {
     const [chatbot, viewChatbot] = useState("none")
     const [btnIcon, setbtnIcon] = useState(chabotIcon);
+    const [overflow, setOverFlow] = useState("hidden")
 
     const view = () => {
         if (chatbot === "none") {
@@ -16,10 +17,12 @@ export default function Chatbot() {
         }
     }
 
-    // const [cssChatbot, setCss] = useState("null");
-    const location = window.location.pathname;
-    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/docs' || location == '/preparation')) {
 
+
+    const location = window.location.pathname;
+
+    if(!location.includes('/admin') && (location == '/home' ||location == '/cvbuilder' || location == '/preparation' || location == '/docs'))
+    {
         return (
             <>
                 <div className="chatbot" >
@@ -33,8 +36,9 @@ export default function Chatbot() {
                                 </ul>
                             </nav>
                         </div>
-                        <div className="chatbot-text">
-
+                        <div className="chatbot-text" style={{overflowY: overflow}}>
+                            <p className='bot-text'>Hello 👋🏻 I am PlacementPal , How can I assist you today?</p>
+                            <p className='user-text'>Hello</p>
                         </div>
                         <div className="query-box">
                             <input type="text" placeholder="Enter your query . . ." className='query-input' />
@@ -46,5 +50,5 @@ export default function Chatbot() {
                 /></button>
             </>
         )
-    }
-}
+    
+}}
