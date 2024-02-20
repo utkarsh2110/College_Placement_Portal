@@ -22,6 +22,7 @@ import Chatbot from './chatbot'
 import { useState } from 'react'
 import AddPrep from '../admin/addPrep'
 import Students from '../admin/Students'
+import AskAdmin from './AskAdmin'
 
 function App() {
 
@@ -51,6 +52,8 @@ function App() {
               <Route path='/cvbuilder' element={<CVBulider />} />
               <Route path='/Docs' element={<Docs />} />
               <Route path='/preparation' element={<Preparation />} />
+              <Route path='/askAdmin' element={<AskAdmin />} />
+              <Route path='/register' element={<Register />} />
               <Route path='/Profile' element={<Profile />} />
               <Route path='*' element={<NotFound404 />} />
 

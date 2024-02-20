@@ -295,6 +295,12 @@ app.get("/changePass", userAuthentication, (req, res) => {
         sapid: req.user.sapid
     })
 })
+
+app.get("/askAdmin", userAuthentication, (req, res) => {
+    res.json({
+        sapid: req.user.sapid
+    })
+})
 app.get("/profile", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid: req.user.sapid });
     res.json({

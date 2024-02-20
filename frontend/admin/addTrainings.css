@@ -31,3 +31,17 @@
     font-weight: bold;
     text-align: center;
 }
+
+
+.txtarea:focus{
+    outline: none;
+    box-shadow: none;
+   
+}
+.txtarea{
+    width: 437px;
+    resize: none;
+    border-radius: 2px;
+    margin-left: 3px;
+    outline: grey;
+}

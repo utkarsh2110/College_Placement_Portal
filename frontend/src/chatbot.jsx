@@ -3,6 +3,8 @@ import chabotIcon from './assets/chatbot.png'
 import send from './assets/send.png'
 import { useState } from 'react'
 import down from './assets/down.svg'
+import Avatar from "@mui/material/Avatar"
+import { faDribbble } from '@fortawesome/free-brands-svg-icons'
 export default function Chatbot() {
 
     const [bottxt, setBotTxt] = useState(["Hello 👋🏻 I am PlacementPal , How can I assist you today?"])
@@ -11,7 +13,9 @@ export default function Chatbot() {
 
 
     const [chatbot, viewChatbot] = useState("none")
+
     const [btnIcon, setbtnIcon] = useState(chabotIcon);
+
     const [overflow, setOverFlow] = useState("scroll")
 
     const [prompt, setText] = useState("")
@@ -36,10 +40,28 @@ export default function Chatbot() {
         const maxLength = Math.max(bottxt.length, prompts.length);
         for (let i = 0; i < maxLength; i++) {
             if (bottxt[i]) {
-                elements.push(<p key={`bot${i}`} className='bot-text'>{bottxt[i]}</p>);
+                elements.push(
+                <div className='bot'>
+                    <Avatar
+                    sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
+                    src={chabotIcon}   
+                    className='bot-avatar'
+                    />
+                    <p key={`bot${i}`} className='bot-text'>{bottxt[i]}</p>
+                </div>
+                );
             }
             if (prompts[i]) {
-                elements.push(<p key={`user${i}`} className='user-text'>{prompts[i]}</p>);
+                elements.push(  
+                    <div className='user'>
+                        <p key={`user${i}`} className='user-text'>{prompts[i]}</p>
+                        <Avatar
+                        sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
+                        children={localStorage.getItem("init")}   
+                        className='user-avatar'
+                        />
+                    </div>
+                )
             }
         }
         return elements;
@@ -48,7 +70,7 @@ export default function Chatbot() {
 
     const location = window.location.pathname;
 
-    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs')) {
+    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin')) {
         return (
             <>
                 <div className="chatbot" >

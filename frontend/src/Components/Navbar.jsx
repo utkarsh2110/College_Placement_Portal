@@ -17,7 +17,7 @@ export default function Navbar() {
     }
 
     const location = window.location.pathname;
-    if(location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/profile" || location == '/changePass' || location.includes('/admin') && location != ('/admin/login'))
+    if(location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/profile" || location == '/changePass'|| location == '/askAdmin' || location.includes('/admin') && location != ('/admin/login'))
     {
         if(location.includes('/admin') && location != ('/admin/login'))
         {
