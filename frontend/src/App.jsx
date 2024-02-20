@@ -23,7 +23,8 @@ import { useState } from 'react'
 import AddPrep from '../admin/addPrep'
 import Students from '../admin/Students'
 import AskAdmin from './AskAdmin'
-
+import ResolveQueries from '../admin/ResolveQueries'
+import AddCompanies from '../admin/addCompanies'
 function App() {
 
   
@@ -42,6 +43,8 @@ function App() {
               <Route path='/admin/home' element={<AdminHome />} />
               <Route path='/admin/trainings' element={<AddTrainings />} />
               <Route path='/admin/preparation' element={<AddPrep />} />
+              <Route path='/admin/queries' element={<ResolveQueries />} />
+              <Route path='/admin/companies' element={<AddCompanies/>} />
               <Route path='/admin/students' element={<Students />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />

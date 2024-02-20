@@ -116,6 +116,7 @@
     border-radius: 10px;
     position: relative;
     margin-bottom: 20px;
+    text-wrap: wrap;
 }
 
 .user-text{
@@ -131,6 +132,7 @@
     margin-top: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
+    text-wrap: wrap;
 }
 
 .bot{

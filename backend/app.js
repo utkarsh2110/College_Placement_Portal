@@ -104,6 +104,13 @@ const PDFSchema = new mongoose.Schema({
     pdf: String
 });
 
+const querySchema = new mongoose.Schema({
+    sapid: Number,
+    query: String,
+    resolved: Boolean
+});
+
+
 const CVSchema = new mongoose.Schema({
 
     Linkedin: String,
@@ -149,6 +156,7 @@ const Admin = mongoose.model('Admin', adminSchema);
 const Student = mongoose.model('Student', studentSchema);
 const Training = mongoose.model('Trainings', TrainingSchema);
 const Material = mongoose.model('Material', MaterialSchema);
+const Query = mongoose.model('Query', querySchema);
 
 // Database: Connection
 mongoose.connect('mongodb+srv://utkash:HNkcstfnDi9RXhH2@cluster0.0cgutry.mongodb.net/NMIMS');
@@ -296,11 +304,44 @@ app.get("/changePass", userAuthentication, (req, res) => {
     })
 })
 
-app.get("/askAdmin", userAuthentication, (req, res) => {
+app.get("/askAdmin", userAuthentication, async (req, res) => {
+    const std = await Student.findOne({ sapid: req.user.sapid });
     res.json({
-        sapid: req.user.sapid
+        sapid: std
     })
 })
+
+app.get("/admin/queries", async (req, res) => {
+    const queries = await Query.find({resolved: false});
+    if(queries){
+        res.json({
+            queries
+        })
+    }
+    else{
+        res.send("No Queries to be resolved")
+    }
+})
+app.post("/admin/queries", async (req, res) => {
+    console.log(req.body)
+})
+
+app.post("/askAdmin", userAuthentication, async (req, res) => {
+   console.log("hello");
+   const {sapid, query} = req.body;
+   const q = await Query.findOne({sapid, query, resolved: false});
+   console.log(req.body)
+   if(q){
+        res.json({"Resp":"Query Exists Already"})
+   }
+   else{
+        const newQuery = new Query({sapid, query, resolved: false});
+        await newQuery.save();
+        res.json({"Resp": "Query Submitted"})
+   }
+
+})
+
 app.get("/profile", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid: req.user.sapid });
     res.json({

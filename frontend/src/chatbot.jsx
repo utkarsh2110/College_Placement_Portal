@@ -41,20 +41,20 @@ export default function Chatbot() {
         for (let i = 0; i < maxLength; i++) {
             if (bottxt[i]) {
                 elements.push(
-                <div className='bot'>
+                <div className='bot' key={`bot${i}`}>
                     <Avatar
                     sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
                     src={chabotIcon}   
                     className='bot-avatar'
                     />
-                    <p key={`bot${i}`} className='bot-text'>{bottxt[i]}</p>
+                    <p className='bot-text'>{bottxt[i]}</p>
                 </div>
                 );
             }
             if (prompts[i]) {
                 elements.push(  
-                    <div className='user'>
-                        <p key={`user${i}`} className='user-text'>{prompts[i]}</p>
+                    <div className='user' key={`user${i}`}>
+                        <p className='user-text'>{prompts[i]}</p>
                         <Avatar
                         sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
                         children={localStorage.getItem("init")}   

@@ -10,7 +10,7 @@ export default function AskAdmin() {
     const [sapid, setSapid] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:3000/profile", {
+        fetch("http://localhost:3000/askAdmin", {
             method: "GET",
             headers: {
                 "Authorization": "bearer " + localStorage.getItem("token")
@@ -31,30 +31,32 @@ export default function AskAdmin() {
             <h2 id='training-header'>Have a Doubt? <br /> Ask your query here</h2>
             <div className="card">
                 <TextField fullWidth label={sapid} id="fullWidth" disabled /> <br />
-                {/* <textarea cols="1" rows="5" placeholder='Enter your query' style={{ outline: "none", resize: "none", width: "440px" }} ></textarea> <br /> */}
                 <TextareaAutosize
                     maxRows={4}
                     minRows={4}
                     className='txtarea'
                     aria-label="maximum height"
                     placeholder="Ask your query..."
+                    onChange={(e)=>{setQuery(e.target.value)}}
                 /> <br />
                 <Button variant="contained" onClick={() => {
 
                     fetch('http://localhost:3000/askAdmin', {
                         method: "POST",
                         body: JSON.stringify({
+                            sapid,
                             query
                         }),
                         headers: {
-                            "Content-Type": "application/json"
+                            "Content-Type": "application/json",
+                            "Authorization": "bearer " + localStorage.getItem("token"),
                         }
                     }).then((resp) => {
                         if (resp.ok) window.location = '/askAdmin'
                         resp.json().then((data) => {
                         });
                     })
-                }} >ASK QUERY</Button>
+                }} >SEND QUERY</Button>
             </div>
         </div>
 
