@@ -321,7 +321,9 @@ app.get("/cvbuilder", userAuthentication, async (req, res) => {
 
 app.get("/docs", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid: req.user.sapid });
-    const {sapid} = std;
+    if(std){
+        res.json({sapid: std.sapid})
+    }
 })
 
 

@@ -28,6 +28,7 @@ export default function Students(){
                 <td>{element.course || "B.TECH CS"}</td>
                 <td>{element.year || "4th"}</td>
                 <td>{element.placed || "Unplaced"}</td>
+                <button className="view">View</button>
             </tr>
         ));
     };
@@ -48,6 +49,7 @@ export default function Students(){
                 <th>COURSE</th>
                 <th>YEAR</th>
                 <th>STATUS</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>

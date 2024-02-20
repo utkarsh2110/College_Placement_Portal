@@ -39,3 +39,14 @@ tr:nth-child(even){
 th,tr{
     border-radius: 5px;
 }
+
+.view{
+    background-color: #8f2e23;
+    color: white;
+    border: 1px solid #8f2e23;
+    width: 100%;
+    padding: 7px 5px;
+    height: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+}
