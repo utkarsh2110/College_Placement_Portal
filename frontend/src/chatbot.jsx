@@ -68,7 +68,7 @@ export default function Chatbot() {
                             {chats()}
                         </div>
                         <div className="query-box">
-                            <input type="text" id="utext" placeholder="Enter your query . . ." className='query-input' onChange={(e) => { setText(e.target.value) }} />
+                            <input type="text" id="utext" placeholder="Enter your query . . ." className='query-input' autoComplete='off' onChange={(e) => { setText(e.target.value) }} />
                             <button onClick={() => {
                                 if (prompt) {
                                     setPrompts((prevValue) => [...prevValue, prompt]);
