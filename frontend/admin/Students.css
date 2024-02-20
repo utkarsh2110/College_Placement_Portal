@@ -1,0 +1,41 @@
+.std-main{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    margin: 4em auto auto 2em
+}
+.std-h1{
+    font-size: 26px;
+    color: #8f2e23;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    margin-left: 0.5em;
+}
+
+table{
+    width: 100%;
+    padding: 10px;  
+}
+
+th{
+    padding: 10px;
+    font-size: 18px;
+    background-color: #8f2e23;
+    color: white;
+}
+td{
+    font-size: 18px;
+    padding: 10px;
+    color: black;
+}
+
+tr:nth-child(odd){
+    background-color: #F8F8F8
+}
+tr:nth-child(even){
+    background-color: #F1F1F1
+}
+
+th,tr{
+    border-radius: 5px;
+}

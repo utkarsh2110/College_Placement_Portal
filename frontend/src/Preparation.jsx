@@ -14,7 +14,6 @@ export default function Preparation(){
             if(!resp.ok) window.location = '/login'
             else{
             resp.json().then((data)=>{
-                console.log(data.materials)
                 setMaterial(data.materials)
             })
             };
@@ -34,7 +33,7 @@ export default function Preparation(){
                                     <div className="prep-title">
                                     <h1>Prep Material for {e.company}</h1>
                                     <p>Role: {e.role}</p>
-                                    <p>Desc: {e.desc} </p>
+                                    <p>Description: {e.desc} </p>
                                     <p>Type: {e.type} </p>
                                     <p>URL: <a href={e.url}>Click Here!</a></p>
                                 </div>

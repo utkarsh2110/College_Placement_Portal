@@ -88,7 +88,6 @@ span{
 }
 .training-template
 {
-    width: 200px;
     display: flex;
     flex-direction: column;
     gap: 0.5em;

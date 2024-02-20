@@ -29,9 +29,7 @@ export default function Chatbot() {
             setbtnIcon(chabotIcon)
         }
     }
-    // if(document.getElementById("pbox").childElementCount >=4){
-    //     setOverFlow("scroll")
-    // }
+   
     
     const chats = () => {
         const elements = [];

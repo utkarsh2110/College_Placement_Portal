@@ -21,6 +21,7 @@ import Contact from './Contact'
 import Chatbot from './chatbot'
 import { useState } from 'react'
 import AddPrep from '../admin/addPrep'
+import Students from '../admin/Students'
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
               <Route path='/admin/home' element={<AdminHome />} />
               <Route path='/admin/trainings' element={<AddTrainings />} />
               <Route path='/admin/preparation' element={<AddPrep />} />
+              <Route path='/admin/students' element={<Students />} />
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/contact' element={<Contact />} />

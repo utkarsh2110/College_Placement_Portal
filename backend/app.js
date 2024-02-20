@@ -123,6 +123,7 @@ const studentSchema = new mongoose.Schema({
     email: String,
     password: String,
     sapid: Number,
+    placed: Boolean
 });
 
 const TrainingSchema = new mongoose.Schema({
@@ -202,7 +203,7 @@ app.post("/register", async (req, res) => {
         res.status(403).send("Already registered");
     }
     else {
-        const newStd = new Student({ firstName: fname, lastName: lname, email: email, password: pass1, sapid: sapid });
+        const newStd = new Student({ firstName: fname, lastName: lname, email: email, password: pass1, sapid: sapid, placed: false });
         sendMail(email, fname + " " + lname);
         await newStd.save();
         res.sendStatus(200);
@@ -365,6 +366,16 @@ app.post('/admin/addPrep', async (req, res)=>{
         res.sendStatus(200);
     }
 });
+
+app.get('/admin/students', async (req,res)=>{
+    const students = await Student.find();
+    if(students){
+        res.json({students})
+    }
+    else{
+        res.sendStatus(404);
+    }
+})
 
 
 app.post('/chatbot', async (req, res)=>{

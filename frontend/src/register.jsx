@@ -99,8 +99,8 @@ export default function Register() {
                                 "Content-type": "application/json"
                             }
                         }).then((resp) => {
+                            if(resp.ok) window.location = '/login'
                             resp.json().then((data) => {
-                                if(resp.ok) window.location = '/login'
                             });
 
                         })
