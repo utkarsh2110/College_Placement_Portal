@@ -60,45 +60,24 @@ export default function CVBulider() {
                         <input type="url" name="GitHonclickub" id="GitHub" />
                     </div>
 
-                    <div className="lang">
-                        <p>Languages Known</p>
-                        <input type="text" name="lang" id="lang" />
-                    </div>
-
-                    <div className="age">
-
-                        <p>Age</p>
-                        <input type="number" name="age" id="age" max="25" min="18" />
-                    </div>
-
                     <div className="course">
-                        <p>Course</p>
-                        <select name="course" id="course" autoComplete="off" onChange={e=>{e.target.value}}>
-                            <option defaultValue={true} disabled>Select your Course</option>
-                            <option value="btech" id="btech">B.Tech</option>
-                            <option value="mbatech"  id="mba">MBA Tech</option>
-                        </select>
+                        <p>Contact Number</p>
+                        <input type="tel" maxLength={10}/>
                     </div>
-
+              
 
                     <div className="specialisation">
                         <p>Specialisation</p>
                         <select name="specialisation" id="specialisation" autoComplete="off">
                             <option defaultValue={true} disabled>Select your specialisation</option>
-                            <option value="CE" id="ce">Computer Engineering (CE)</option>
-                            <option value="CSBS" className="specs">Computer Science & Business Systems (CSBS)</option>
-                            <option value="AIDS" className="specs">Aritificial Intelligence & Data Science (AI & DS)</option>
+                            <option value="CE" id="ce">B.Tech Computer in Engineering </option>
+                            <option value="CSBS" className="specs">B.Tech in Computer Science & Business Systems</option>
+                            <option value="AIDS" className="specs">B.Tech in  Aritificial Intelligence & Data Science</option>
+                            <option value="mbatec" id="ce">MBA Tech in Computer Engineering</option>
                         </select>
                     </div>
 
-                    <div className="gender">
-                        <p>Gender</p>
-                        <select name="gender" id="gender" autoComplete="off">
-                            <option defaultValue={true} disabled>Select your Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
+        
                     <br />
                 </div>
 
@@ -116,24 +95,24 @@ export default function CVBulider() {
                         </div>
 
                         <div className="College">
-                            <p>College</p>
-                            <input type="text" name="college" id="college" />
+                            <p>Graduation Year</p>
+                            <input type="number"  min="2024" max="2026" name="college" id="college" />
                         </div>
 
 
                         <div className="Year">
-                            <p>Year</p>
-                            <input type="tel" name="year" id="year" />
+                            <p>Semester</p>
+                            <input type="number" name="year" id="year" min="7" max="10" />
                         </div>
 
                         <div className="Score">
 
                             <p>CGPA</p>
-                            <input type="number" name="score" id="Score" min="0.0" max="4.0" />
+                            <input type="number" name="score" id="Score" min="0.0" max="4.0" step=".01" />
                         </div>
                     </div>
 
-                    <h3>12th/Diploma</h3>
+                    <h3>12th</h3>
                     <div className="class12">
 
 
@@ -155,8 +134,8 @@ export default function CVBulider() {
 
                         <div className="Score">
 
-                            <p>CGPA / %</p>
-                            <input type="number" name="score" id="Score" min="0.0" max="4.0" />
+                            <p>Percentage</p>
+                            <input type="number" name="score" id="Score" min="50.0" max="100.0" step=".01"/>
                         </div>
                     </div>
 
@@ -182,8 +161,8 @@ export default function CVBulider() {
 
                         <div className="Score">
 
-                            <p>CGPA / %</p>
-                            <input type="number" name="score" id="Score" min="0.0" max="4.0" />
+                            <p>Percentage</p>
+                            <input type="number" name="score" id="Score" min="50.0" max="100.0" step=".01" />
                         </div>
                     </div>
 
@@ -215,8 +194,8 @@ export default function CVBulider() {
                         </div>
 
                         <div className="duration">
-                            <p>Duration</p>
-                            <input type="number" name="duration" min="1" max="12" />
+                            <p>Duration (in months)</p>
+                            <input type="number" name="duration" min="2" max="12" />
                         </div>
 
                         <div className="intern-desc">
@@ -256,7 +235,7 @@ export default function CVBulider() {
 
                         <div className="proj-desc">
                             <p>Description</p>
-                            <textarea name="" id="" cols="30" rows="5"></textarea>
+                            <textarea name="" id="" cols="30" rows="5" ></textarea>
                         </div>
                     </div>
                     <div className="buttons">
@@ -311,11 +290,11 @@ export default function CVBulider() {
 
                     <div className="SkillsForm">
                         <div className="Languages">
-                            <p>Languages</p>
+                            <p>Programming Languages</p>
                             <input type="text" name="Languages" id="" />
                         </div>
                         <div className="Softwares">
-                            <p>Softwares</p>
+                            <p>Tools/Frameworks/Softwares</p>
                             <input type="text" name="soft" />
                         </div>
 
@@ -348,8 +327,8 @@ export default function CVBulider() {
                         </div>
 
                         <div className="duration">
-                            <p>Duration</p>
-                            <input type="number" name="duration" min="1" max="12" />
+                            <p>Duration (in Years)</p>
+                            <input type="number" name="duration" min="1" max="5" />
                         </div>
 
                         <div className="por-desc">
@@ -385,7 +364,7 @@ export default function CVBulider() {
 
                         <div className="Year">
                             <p>Year</p>
-                            <input type="date" />
+                            <input type="number" min="2020" max="2024" />
                         </div>
                     </div>
                     <div className="buttons">
@@ -416,7 +395,7 @@ export default function CVBulider() {
 
                         <div className="Year">
                             <p>Year</p>
-                            <input type="date" />
+                            <input type="number" min="2020" max="2024"/>
                         </div>
                     </div>
                     <div className="buttons">
