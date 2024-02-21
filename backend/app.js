@@ -437,6 +437,13 @@ app.post('/chatbot', async (req, res)=>{
 
 
 
+app.post("/cvbuilder", (req, res)=>{
+    console.log(req.body)
+})
+
+
+
+
 var port = 3000;
 app.listen(port, function () {
     console.log("Server started on port " + port);

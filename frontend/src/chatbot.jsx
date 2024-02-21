@@ -10,6 +10,7 @@ export default function Chatbot() {
     const [bottxt, setBotTxt] = useState(["Hello 👋🏻 I am PlacementPal , How can I assist you today?"])
     const [prompts, setPrompts] = useState([])
 
+    const [msg, setMsg] = useState(null);
 
 
     const [chatbot, viewChatbot] = useState("none")
@@ -88,13 +89,11 @@ export default function Chatbot() {
                             {chats()}
                         </div>
                         <div className="query-box">
-                            <input type="text" id="utext" placeholder="Enter your query . . ." className='query-input' autoComplete='off' onChange={(e) => { setText(e.target.value) }} />
+                            <input type="text" id="utext" placeholder="Enter your query . . ." value={msg} className='query-input' autoComplete='off' onChange={(e) => { setText(e.target.value) }} />
                             <button onClick={() => {
                                 if (prompt) {
                                     setPrompts((prevValue) => [...prevValue, prompt]);
-                                    console.log(prompts)
-                                    document.getElementById("utext").setAttribute("value", "");
-        
+                                    setMsg("")
                                     fetch('http://localhost:3000/chatbot', {
                                         method: 'POST',
                                         body: JSON.stringify({
@@ -107,6 +106,7 @@ export default function Chatbot() {
                                         resp.json().then(data => {
                                             if(data.reply){
                                                 setBotTxt((prev)=>[...prev, data.reply])
+                                                setMsg(null)
                                             }
                                         })
                                     })
