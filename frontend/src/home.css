@@ -46,7 +46,7 @@
 .content--right{
     display: flex;
     flex-direction: column;
-    gap: 3em;
+    gap: 2em;
     margin-left: 4em;
     width: 100%;
 }
@@ -71,7 +71,6 @@ h1{
 {
     margin-bottom: 10px;
     grid-column: 1/-1;
-    
 }
 
 .trainings
@@ -80,6 +79,7 @@ h1{
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto;
     gap: 1em;
+
 }
 
 span{
@@ -90,7 +90,7 @@ span{
 {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+   
     background-color: #e2e2e271;
     width: fit-content;
     padding: 16px;

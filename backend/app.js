@@ -350,11 +350,13 @@ app.get("/profile", userAuthentication, async (req, res) => {
 })
 
 app.get('/files/:fileName', userAuthentication, (req, res) => {
-    console.log("request rcvd");
-    console.log(fileName = req.params.fileName)
-    const type = fileName.split("_")[1];
-    const file = req.user.sapid + "_" + type;
-    res.json({ url: file });
+    
+    const fileName = req.params.fileName;
+    console.log(fileName)
+    const filepath = __dirname + "/files/" + fileName + ".pdf";
+    res.setHeader("Content-Type", "application/pdf")
+    res.setHeader('Content-Disposition', 'inline; filename=' + fileName + '.pdf')
+    res.sendFile(filepath);
 })
 
 

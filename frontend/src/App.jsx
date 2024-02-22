@@ -25,10 +25,9 @@ import Students from '../admin/Students'
 import AskAdmin from './AskAdmin'
 import ResolveQueries from '../admin/ResolveQueries'
 import AddCompanies from '../admin/addCompanies'
+import FAQ from './faq'
+
 function App() {
-
-  
-
   return (
     <div className='app'>
       <Router>
@@ -58,6 +57,7 @@ function App() {
               <Route path='/askAdmin' element={<AskAdmin />} />
               <Route path='/register' element={<Register />} />
               <Route path='/Profile' element={<Profile />} />
+              <Route path='/faq' element={<FAQ />} />
               <Route path='*' element={<NotFound404 />} />
 
             </Routes>

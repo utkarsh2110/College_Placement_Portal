@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function LeftMenuBar() {
     const navigate = useNavigate();
     const location = window.location.pathname;
-    if(location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/changePass" || location == "/profile" || location == '/askAdmin'){
+    if(location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/changePass" || location == "/profile" || location == '/askAdmin' || location == '/faq'){
     return (
         <div className="menu">
             <div className="index menuItem"   onClick={()=>{navigate('/home');}}>Home</div>
