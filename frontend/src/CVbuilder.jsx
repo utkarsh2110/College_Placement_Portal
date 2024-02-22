@@ -119,9 +119,9 @@ export default function CVBulider() {
         setExtraCurr(Updated);
     }
     const handleCurrDelete = (index) => {
-            const updated = [...extraCurr];
-            updated.splice(index, 1);
-            setExtraCurr(updated)
+        const updated = [...extraCurr];
+        updated.splice(index, 1);
+        setExtraCurr(updated)
     }
 
 
@@ -137,9 +137,9 @@ export default function CVBulider() {
         setAcad(Updated);
     }
     const handleAcadDelete = (index) => {
-            const updated = [...acad];
-            updated.splice(index, 1);
-            setAcad(updated)
+        const updated = [...acad];
+        updated.splice(index, 1);
+        setAcad(updated)
     }
 
 
@@ -180,9 +180,9 @@ export default function CVBulider() {
         setPOR(Updated);
     }
     const handlePORdelete = (index) => {
-            const updated = [...por];
-            updated.splice(index, 1);
-            setPOR(updated)
+        const updated = [...por];
+        updated.splice(index, 1);
+        setPOR(updated)
     }
 
     const handleChange = (e) => {
@@ -191,11 +191,8 @@ export default function CVBulider() {
             return { ...prev, [name]: value }
         })
     }
-    const submit = (e)=>{
+    const submit = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target)
-        const data = Object.fromEntries(formData)
-        console.log(data)
     }
 
     useEffect(() => {
@@ -222,300 +219,339 @@ export default function CVBulider() {
 
     }, []);
 
-    return (
-        <div className="cv-form">
 
-            <form onSubmit={submit}>
+    const HandleSubmit = async (e) => {
 
-                <h2>Basic details</h2>
-                <div className="basics">
+        if (CVdetails && intern && project && certi) {
+            try {
+                const response = await fetch('http://localhost:3000/cvbuilder', {
+                    method: "POST",
+                    body: JSON.stringify({
 
-                    <div className="name">
-                        <p>Full Name</p>
-                        <input type="text" name="name" id="name" value={CVdetails.name || undefined} autoComplete="off" />
-                    </div>
+                        CVdetails,
+                        intern,
+                        project,
+                        certi,
+                        por,
+                        extraCurr,
+                        acad
 
-                    <div className="email">
-                        <p>NMIMS Email</p>
-                        <input type="email" name="email" id="email" value={CVdetails.email || undefined} />
-                    </div>
-
-
-                    <div className="l-url">
-                        <p>Linkedin URL</p>
-                        <input type="url" name="linkedin" id="linkedin" autoComplete="off" onChange={handleChange} />
-                    </div>
-
-                    <div className="g-url">
-                        <p>GitHub URL</p>
-                        <input type="url" name="github" id="GitHub" autoComplete="off" onChange={handleChange} />
-                    </div>
-
-                    <div className="course">
-                        <p>Contact Number</p>
-                        <input type="tel" maxLength={10} name="contact" autoComplete="off" onChange={handleChange} />
-                    </div>
-
-
-                    <div className="specialisation">
-                        <p>Specialisation</p>
-                        <select name="specialisation" id="specialisation" autoComplete="off" onChange={handleChange}>
-                            <option defaultValue={true} disabled>Select your specialisation</option>
-                            <option id="ce">B.Tech in Computer Engineering </option>
-                            <option className="specs">B.Tech in Computer Science & Business Systems</option>
-                            <option className="specs">B.Tech in  Aritificial Intelligence & Data Science</option>
-                            <option id="ce">MBA Tech</option>
-                        </select>
-                    </div>
+                    }),
+                    headers: {
+                        "Content-type": "application/json",
+                        "Authorization": "bearer " + localStorage.getItem("token")
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+            } catch (error) {
+                console.error('Error fetching file:', error);
+            }
+        }
+    };
 
 
-                    <br />
+
+
+
+return (
+    <div className="cv-form">
+
+        <form onSubmit={submit}>
+
+            <h2>Basic details</h2>
+            <div className="basics">
+
+                <div className="name">
+                    <p>Full Name</p>
+                    <input type="text" name="name" id="name" value={CVdetails.name || undefined} autoComplete="off" />
                 </div>
 
-                <h2 className="acad">Academic Background</h2>
-                <div className="Academic">
-
-                    <h3>UNDERGRADUATE</h3>
-
-                    <div className="undergrad">
-                        <div className="Institute">
-                            <p>University</p>
-                            <input type="text" id="name" autoComplete="off" value="NMIMS University" />
-                        </div>
-
-                        <div className="College">
-                            <p>Graduation Year</p>
-                            <input type="number" min="2024" max="2026" name="gradYear" autoComplete="off" id="college" onChange={handleChange} />
-                        </div>
-
-
-                        <div className="Year">
-                            <p>Semester</p>
-                            <input type="number" id="year" min="7" name="sem" autoComplete="off" max="10" onChange={handleChange} />
-                        </div>
-
-                        <div className="Score">
-
-                            <p>CGPA</p>
-                            <input type="number" name="gpa" id="Score" min="0.0" autoComplete="off" max="4.0" step=".01" onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <h3>12th</h3>
-                    <div className="class12">
-
-
-                        <div className="Institute">
-                            <p>Institute</p>
-                            <input type="text" name="HSCinstitute" id="name" autoComplete="off" onChange={handleChange} />
-                        </div>
-
-                        <div className="Board">
-                            <p>Board</p>
-                            <input type="text" name="HSCboard" id="college" autoComplete="off" onChange={handleChange} />
-                        </div>
-
-
-                        <div className="Year">
-                            <p>Year</p>
-                            <input type="number" min="2018" max="2023" name="HSCgradYear" autoComplete="off" id="hsc-year" onChange={handleChange} />
-                        </div>
-
-                        <div className="Score">
-
-                            <p>Percentage</p>
-                            <input type="number" name="HSCpercentage" id="Score" min="50.0" autoComplete="off" max="100.0" step=".01" onChange={handleChange} />
-                        </div>
-                    </div>
-
-                    <h3>10th</h3>
-                    <div className="class10">
-
-
-                        <div className="Institute">
-                            <p>Institute</p>
-                            <input type="text" name="SSCinstitute" id="name" autoComplete="off" onChange={handleChange} />
-                        </div>
-
-                        <div className="Board">
-                            <p>Board</p>
-                            <input type="text" name="SSCboard" id="college" autoComplete="off" onChange={handleChange} />
-                        </div>
-
-
-                        <div className="Year">
-                            <p>Year</p>
-                            <input type="number" min="2016" max="2021" autoComplete="off" name="SSCgradYear" id="year" onChange={handleChange} />
-                        </div>
-
-                        <div className="Score">
-
-                            <p>Percentage</p>
-                            <input type="number" name="SSCpercentage" id="Score" autoComplete="off" min="50.0" max="100.0" step=".01" onChange={handleChange} />
-                        </div>
-                    </div>
-
-
-                    <br />
+                <div className="email">
+                    <p>NMIMS Email</p>
+                    <input type="email" name="email" id="email" value={CVdetails.email || undefined} />
                 </div>
 
 
-                <div className="internships">
-
-                    <h2>Internships</h2>
-                    <div className="addIntern">
-                        <button className="addInternship" type="button" onClick={intern.length < 2 && addInternship}> Add Internship</button>
-                    </div>
-
-                    {
-                        intern.map((element, index) => {
-                            return (
-                                <>
-                                    <h3>Internship {index + 1}</h3>
-                                    <div className="InternshipForm" key={index}>
-                                        <div className="role">
-                                            <p>Role</p>
-                                            <input type="text" name="role" id="" autoComplete="off" onChange={(e) => handleInternChange(index, e.target)} />
-                                        </div>
-
-                                        <div className="company">
-                                            <p>Company name</p>
-                                            <input type="text" name="company" autoComplete="off" onChange={(e) => handleInternChange(index, e.target)} />
-                                        </div>
-
-                                        <div className="duration">
-                                            <p>Duration (in months)</p>
-                                            <input type="number" name="duration" min="2" autoComplete="off" max="12" onChange={(e) => handleInternChange(index, e.target)} />
-                                        </div>
-
-                                        <div className="intern-desc">
-                                            <p>Description</p>
-                                            <textarea name="desc" id="" cols="30" rows="5" onChange={(e) => handleInternChange(index, e.target)}></textarea>
-                                        </div>
-                                    </div>
-                                    <div className="buttons">
-                                        <button className="del" onClick={() => handleIntDelete(index)}>Delete</button>
-                                        <button className="add" >ADD</button>
-                                    </div>
-                                    <br /> <br />
-                                </>
-
-                            )
-                        })}
-
-                    <br />
+                <div className="l-url">
+                    <p>Linkedin Handle</p>
+                    <input type="text" name="linkedin" id="linkedin" placeholder="https://linkedin.com/in/xxxx" autoComplete="off" onChange={handleChange} />
                 </div>
 
-                <div className="Projects">
+                <div className="g-url">
+                    <p>GitHub handle</p>
+                    <input type="text" name="github" id="GitHub" placeholder="https://github.com/xxxx" autoComplete="off" onChange={handleChange} />
+                </div>
 
-                    <h2>Projects</h2>
-                    <div className="addProj">
-                        <button className="addProject" onClick={project.length < 4 && addProject}> Add Project</button>
+                <div className="course">
+                    <p>Contact Number</p>
+                    <input type="tel" maxLength={10} name="contact" autoComplete="off" onChange={handleChange} />
+                </div>
+
+
+                <div className="specialisation">
+                    <p>Specialisation</p>
+                    <select name="specialisation" id="specialisation" autoComplete="off" onChange={handleChange}>
+                        <option defaultValue={true} disabled>Select your specialisation</option>
+                        <option id="ce">B.Tech in Computer Engineering </option>
+                        <option className="specs">B.Tech in Computer Science and Business Systems</option>
+                        <option className="specs">B.Tech in Aritificial Intelligence and Data Science</option>
+                        <option id="ce">MBA Tech in Computer Engineering</option>
+                    </select>
+                </div>
+
+
+                <br />
+            </div>
+
+            <h2 className="acad">Academic Background</h2>
+            <div className="Academic">
+
+                <h3>UNDERGRADUATE</h3>
+
+                <div className="undergrad">
+                    <div className="Institute">
+                        <p>University</p>
+                        <input type="text" id="name" autoComplete="off" value="NMIMS University" />
                     </div>
 
-                    {
-                        project.map((element, index) => {
-                            return <>
-                                <h3>Project {index + 1}</h3>
-                                <div className="ProjectForm">
-                                    <div className="title">
-                                        <p>Title</p>
-                                        <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleProjChange(index, e.target)} />
+                    <div className="College">
+                        <p>Graduation Year</p>
+                        <input type="number" min="2024" max="2026" name="gradYear" autoComplete="off" id="college" onChange={handleChange} />
+                    </div>
+
+
+                    <div className="Year">
+                        <p>Semester</p>
+                        <input type="number" id="year" min="7" name="sem" autoComplete="off" max="10" onChange={handleChange} />
+                    </div>
+
+                    <div className="Score">
+
+                        <p>CGPA</p>
+                        <input type="number" name="gpa" id="Score" min="0.0" autoComplete="off" max="4.0" step=".01" onChange={handleChange} />
+                    </div>
+                </div>
+
+                <h3>12th</h3>
+                <div className="class12">
+
+
+                    <div className="Institute">
+                        <p>Institute</p>
+                        <input type="text" name="HSCinstitute" id="name" autoComplete="off" onChange={handleChange} />
+                    </div>
+
+                    <div className="Board">
+                        <p>Board</p>
+                        <input type="text" name="HSCboard" id="college" autoComplete="off" onChange={handleChange} />
+                    </div>
+
+
+                    <div className="Year">
+                        <p>Year</p>
+                        <input type="number" min="2018" max="2023" name="HSCgradYear" autoComplete="off" id="hsc-year" onChange={handleChange} />
+                    </div>
+
+                    <div className="Score">
+
+                        <p>Percentage</p>
+                        <input type="number" name="HSCpercentage" id="Score" min="50.0" autoComplete="off" max="100.0" step=".01" onChange={handleChange} />
+                    </div>
+                </div>
+
+                <h3>10th</h3>
+                <div className="class10">
+
+
+                    <div className="Institute">
+                        <p>Institute</p>
+                        <input type="text" name="SSCinstitute" id="name" autoComplete="off" onChange={handleChange} />
+                    </div>
+
+                    <div className="Board">
+                        <p>Board</p>
+                        <input type="text" name="SSCboard" id="college" autoComplete="off" onChange={handleChange} />
+                    </div>
+
+
+                    <div className="Year">
+                        <p>Year</p>
+                        <input type="number" min="2016" max="2021" autoComplete="off" name="SSCgradYear" id="year" onChange={handleChange} />
+                    </div>
+
+                    <div className="Score">
+
+                        <p>Percentage</p>
+                        <input type="number" name="SSCpercentage" id="Score" autoComplete="off" min="50.0" max="100.0" step=".01" onChange={handleChange} />
+                    </div>
+                </div>
+
+
+                <br />
+            </div>
+
+
+            <div className="internships">
+
+                <h2>Internships</h2>
+                <div className="addIntern">
+                    <button className="addInternship" type="button" onClick={intern.length < 2 && addInternship}> Add Internship</button>
+                </div>
+
+                {
+                    intern.map((element, index) => {
+                        return (
+                            <>
+                                <h3>Internship {index + 1}</h3>
+                                <div className="InternshipForm" key={index}>
+                                    <div className="role">
+                                        <p>Role</p>
+                                        <input type="text" name="role" id="" autoComplete="off" onChange={(e) => handleInternChange(index, e.target)} />
                                     </div>
+
+                                    <div className="company">
+                                        <p>Company name</p>
+                                        <input type="text" name="company" autoComplete="off" onChange={(e) => handleInternChange(index, e.target)} />
+                                    </div>
+
                                     <div className="duration">
-                                        <p>Duration</p>
-                                        <input type="number" name="duration" autoComplete="off" min="1" max="12" onChange={(e) => handleProjChange(index, e.target)} />
+                                        <p>Duration (in months)</p>
+                                        <input type="number" name="duration" min="2" autoComplete="off" max="12" onChange={(e) => handleInternChange(index, e.target)} />
                                     </div>
 
-                                    <div className="proj-desc">
+                                    <div className="intern-desc">
                                         <p>Description</p>
-                                        <textarea name="desc" id="" cols="30" rows="5" autoComplete="off" onChange={(e) => handleProjChange(index, e.target)} ></textarea>
+                                        <textarea name="desc" id="" cols="30" rows="5" onChange={(e) => handleInternChange(index, e.target)}></textarea>
                                     </div>
                                 </div>
                                 <div className="buttons">
-                                    <button type="button" className="del" onClick={() => handleProjDelete(index)}>Delete</button>
-                                    <button type="button" className="add">ADD</button>
+                                    <button className="del" onClick={() => handleIntDelete(index)}>Delete</button>
+                                    <button className="add" >ADD</button>
                                 </div>
-
-                                <br />
+                                <br /> <br />
                             </>
-                        })
 
+                        )
+                    })}
 
+                <br />
+            </div>
 
+            <div className="Projects">
 
-
-                    }
+                <h2>Projects</h2>
+                <div className="addProj">
+                    <button className="addProject" onClick={project.length < 4 && addProject}> Add Project</button>
                 </div>
 
-                <div className="Certificates">
-
-                    <h2>Certificates</h2>
-                    <div className="addCertis">
-                        <button className="addCerts" onClick={certi.length < 4 && addCerti}> Add Certificates</button>
-                    </div>
-
-                    {certi.map((element, index) => {
-
+                {
+                    project.map((element, index) => {
                         return <>
-                            <h3>Certificate {index + 1}</h3>
-
-                            <div className="ActForm">
+                            <h3>Project {index + 1}</h3>
+                            <div className="ProjectForm">
                                 <div className="title">
                                     <p>Title</p>
-                                    <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleCertiChange(index, e.target)} />
+                                    <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleProjChange(index, e.target)} />
+                                </div>
+                                <div className="duration">
+                                    <p>Duration</p>
+                                    <input type="number" name="duration" autoComplete="off" min="1" max="12" onChange={(e) => handleProjChange(index, e.target)} />
                                 </div>
 
-                                <div className="Year">
-                                    <p>Year</p>
-                                    <input type="number" min="2020" name="year" max="2024" autoComplete="off" onChange={(e) => handleCertiChange(index, e.target)} />
+                                <div className="proj-desc">
+                                    <p>Description</p>
+                                    <textarea name="desc" id="" cols="30" rows="5" autoComplete="off" onChange={(e) => handleProjChange(index, e.target)} ></textarea>
                                 </div>
                             </div>
                             <div className="buttons">
-                                <button className="del" onClick={() => { handleCertiDelete(index) }}>Delete</button>
-                                <button className="add">ADD</button>
+                                <button type="button" className="del" onClick={() => handleProjDelete(index)}>Delete</button>
+                                <button type="button" className="add">ADD</button>
                             </div>
+
                             <br />
                         </>
+                    })
 
 
 
 
-                    })}
 
-                    <br />
+                }
+            </div>
+
+            <div className="Certificates">
+
+                <h2>Certificates</h2>
+                <div className="addCertis">
+                    <button className="addCerts" onClick={certi.length < 4 && addCerti}> Add Certificates</button>
+                </div>
+
+                {certi.map((element, index) => {
+
+                    return <>
+                        <h3>Certificate {index + 1}</h3>
+
+                        <div className="ActForm">
+                            <div className="title">
+                                <p>Title</p>
+                                <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleCertiChange(index, e.target)} />
+                            </div>
+
+                            <div className="Year">
+                                <p>Year</p>
+                                <input type="number" min="2020" name="year" max="2024" autoComplete="off" onChange={(e) => handleCertiChange(index, e.target)} />
+                            </div>
+                        </div>
+                        <div className="buttons">
+                            <button className="del" onClick={() => { handleCertiDelete(index) }}>Delete</button>
+                            <button className="add">ADD</button>
+                        </div>
+                        <br />
+                    </>
+
+
+
+
+                })}
+
+                <br />
+
+            </div>
+
+            <div className="Skills">
+
+                <h2>Skills</h2>
+
+                <div className="SkillsForm">
+                    <div className="Languages">
+                        <p>Programming Languages</p>
+                        <input type="text" name="lang" id="" autoComplete="off" onChange={handleChange} />
+                    </div>
+                    <div className="Softwares">
+                        <p>Tools/Frameworks/Softwares</p>
+                        <input type="text" name="tools" autoComplete="off" onChange={handleChange} />
+                    </div>
 
                 </div>
 
-                <div className="Skills">
+                <br />
 
-                    <h2>Skills</h2>
+            </div>
 
-                    <div className="SkillsForm">
-                        <div className="Languages">
-                            <p>Programming Languages</p>
-                            <input type="text" name="lang" id="" autoComplete="off" onChange={handleChange} />
-                        </div>
-                        <div className="Softwares">
-                            <p>Tools/Frameworks/Softwares</p>
-                            <input type="text" name="tools" autoComplete="off" onChange={handleChange} />
-                        </div>
+            <div className="PORs">
 
-                    </div>
-
-                    <br />
-
+                <h2>Position Of Responsibility</h2>
+                <div className="addPOR">
+                    <button className="addPORs" onClick={por.length < 2 && addPOR}> Add Position</button>
                 </div>
 
-                <div className="PORs">
-
-                    <h2>Position Of Responsibility</h2>
-                    <div className="addPOR">
-                        <button className="addPORs" onClick={por.length < 2 && addPOR}> Add Position</button>
-                    </div>
-
-                    {por.map((element, index) => {
-                        return(
+                {por.map((element, index) => {
+                    return (
                         <>
                             <h3> Certificate {index + 1}</h3>
                             <div className="PORForm">
@@ -526,12 +562,12 @@ export default function CVBulider() {
 
                                 <div className="Club">
                                     <p>Committee/Club</p>
-                                    <input type="text" name="club" autoComplete="off" onChange={(e) => handlePORchange(index, e.target)}  />
+                                    <input type="text" name="club" autoComplete="off" onChange={(e) => handlePORchange(index, e.target)} />
                                 </div>
 
                                 <div className="duration">
                                     <p>Duration (in months)</p>
-                                    <input type="number" name="duration" min="1" max="60" autoComplete="off" onChange={(e) => handlePORchange(index, e.target)}  />
+                                    <input type="number" name="duration" min="1" max="60" autoComplete="off" onChange={(e) => handlePORchange(index, e.target)} />
                                 </div>
 
                                 <div className="por-desc">
@@ -540,123 +576,96 @@ export default function CVBulider() {
                                 </div>
                             </div>
                             <div className="buttons">
-                                <button className="del" onClick={()=>handlePORdelete(index)}>Delete</button>
+                                <button className="del" onClick={() => handlePORdelete(index)}>Delete</button>
                                 <button className="add">ADD</button>
                             </div>
                             <br /> <br />
                         </>
-                    )})}
+                    )
+                })}
 
 
-                    <br />
+                <br />
+            </div>
+
+            <div className="extraCurr">
+
+                <h2>Co-Curricular And Extra-Curricular Activities</h2>
+                <div className="addActs">
+                    <button className="addActivity" onClick={extraCurr.length < 2 && addCurr}> Add Activity</button>
                 </div>
 
-                <div className="extraCurr">
-
-                    <h2>Co-Curricular And Extra-Curricular Activities</h2>
-                    <div className="addActs">
-                        <button className="addActivity" onClick={extraCurr.length < 2 && addCurr}> Add Activity</button>
-                    </div>
-
-                    {
-                        extraCurr.map((element, index) => {
-                            return (
-                                <>
-                                    <h3>Activity {index + 1}</h3>
-                                    <div className="ActForm">
-                                        <div className="Description">
-                                            <p>Description</p>
-                                            <input type="text" name="role" id="" autoComplete="off" onChange={(e) => handleCurrChange(index, e.target)} />
-                                        </div>
-
-                                        <div className="Year">
-                                            <p>Year</p>
-                                            <input type="number" min="2020" max="2024" autoComplete="off" onChange={(e) => handleCurrChange(index, e.target)} />
-                                        </div>
-                                    </div>
-                                    <div className="buttons">
-                                        <button className="del" onClick={() => handleCurrDelete(index)}>Delete</button>
-                                        <button className="add">ADD</button>
-                                    </div>
-                                    <br />
-                                </>
-                            )
-                        })}
-
-                    <br />
-
-                </div>
-
-                <div className="acads">
-
-                    <h2>Academic Achievements</h2>
-                    <div className="addAcads">
-                        <button className="addAcad" onClick={acad.length < 2 && addAcad}> Add Achievement</button>
-                    </div>
-
-                    {acad.map((element, index) => {
+                {
+                    extraCurr.map((element, index) => {
                         return (
                             <>
                                 <h3>Activity {index + 1}</h3>
-                                <div className="AcadForm">
+                                <div className="ActForm">
                                     <div className="Description">
                                         <p>Description</p>
-                                        <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleAcadChange(index, e.target)} />
+                                        <input type="text" name="role" id="" autoComplete="off" onChange={(e) => handleCurrChange(index, e.target)} />
                                     </div>
 
                                     <div className="Year">
                                         <p>Year</p>
-                                        <input type="number" min="2020" name="year" max="2024" autoComplete="off" onChange={(e) => handleAcadChange(index, e.target)} />
+                                        <input type="number" min="2020" max="2024" autoComplete="off" onChange={(e) => handleCurrChange(index, e.target)} />
                                     </div>
                                 </div>
                                 <div className="buttons">
-                                    <button className="del" onClick={() => handleAcadDelete(index)}>Delete</button>
+                                    <button className="del" onClick={() => handleCurrDelete(index)}>Delete</button>
                                     <button className="add">ADD</button>
                                 </div>
-
                                 <br />
                             </>
                         )
                     })}
 
+                <br />
+
+            </div>
+
+            <div className="acads">
+
+                <h2>Academic Achievements</h2>
+                <div className="addAcads">
+                    <button className="addAcad" onClick={acad.length < 2 && addAcad}> Add Achievement</button>
                 </div>
 
-                <div className="buttons1">
-                    <button className="saveDetails">Save Details</button>
-                    <button type="submit" className="submit" onClick={() => {
+                {acad.map((element, index) => {
+                    return (
+                        <>
+                            <h3>Activity {index + 1}</h3>
+                            <div className="AcadForm">
+                                <div className="Description">
+                                    <p>Description</p>
+                                    <input type="text" name="title" id="" autoComplete="off" onChange={(e) => handleAcadChange(index, e.target)} />
+                                </div>
 
-                        if(Object.values)
-                        fetch("http://localhost:3000/cvbuilder", {
-                            method: "POST",
-                            body: JSON.stringify({
+                                <div className="Year">
+                                    <p>Year</p>
+                                    <input type="number" min="2020" name="year" max="2024" autoComplete="off" onChange={(e) => handleAcadChange(index, e.target)} />
+                                </div>
+                            </div>
+                            <div className="buttons">
+                                <button className="del" onClick={() => handleAcadDelete(index)}>Delete</button>
+                                <button className="add">ADD</button>
+                            </div>
 
-                                CVdetails,
-                                intern,
-                                project,
-                                certi,
-                                por,
-                                extraCurr,
-                                acad
-                            }),
-                            headers: {
-                                "Content-type": "application/json"
-                            }
-                        }).then((resp) => {
-                            resp.json().then((data) => {
+                            <br />
+                        </>
+                    )
+                })}
 
+            </div>
 
-                            })
-                        });
+            <div className="buttons1">
+                <button className="saveDetails">Save Details</button>
+                <button type="submit" className="submit" onClick={HandleSubmit}>Submit</button>
+            </div>
 
-                    }} >Submit</button>
-                </div>
+        </form>
 
-            </form>
-
-        </div>
-
-
-    )
-}
+    </div>
 
 
+)}

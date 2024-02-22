@@ -9,15 +9,231 @@ const cors = require('cors');
 const multer = require('multer')
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
-const selflatex = require('node-latex-pdf');
- 
-selflatex(__dirname + '/resume.tex', __dirname + '/files/', (err,msg) => {
-    if(err)
-      console.log(`Error, ${msg}`);
-    else
-      console.log(`Success! ${msg}`);
-});
+const latex = require('node-latex')
 
+function LatexGen(data) {
+    const { CVdetails, intern, project, certi, acad, por } = data
+    const latex = `\\documentclass[a4paper,11pt]{article}
+    \\RequirePackage[T1]{fontenc}
+    
+    \\usepackage{times}
+    \\usepackage{calc}
+    \\usepackage[shortcuts]{extdash}
+    \\usepackage{amsmath}
+    
+    \\usepackage{graphicx} 
+    
+    \\reversemarginpar
+    
+    \\usepackage[paper=letterpaper,
+                marginparwidth=1.1in,     % Length of section titles
+                marginparsep=.075in,       % Space between titles and text
+                margin=0.5in,               % 1 inch margins
+                tmargin=0.65in,
+                includemp]{geometry}
+    
+    \\setlength{\\parindent}{0in}
+    
+    \\usepackage[shortlabels]{enumitem}
+    
+    \\makeatletter
+    \\newlength{\\bibhang}
+    \\setlength{\\bibhang}{0em}
+    \\newlength{\\bibsep}
+     {\\@listi \\global\\bibsep\\itemsep \\global\\advance\\bibsep by\\parsep}
+    \\newlist{bibsection}{itemize}{3}
+    \\setlist[bibsection]{label=,leftmargin=\\bibhang,%
+            itemindent=-\\bibhang,
+            itemsep=\\bibsep,parsep=\\z@,partopsep=0pt,
+            topsep=0pt}
+    \\newlist{bibenum}{enumerate}{3}
+    \\setlist[bibenum]{label=[\\arabic*],resume,leftmargin={\\bibhang+\\widthof{[999]}},%
+            itemindent=-\\bibhang,
+            itemsep=0.05in,parsep=\\z@,partopsep=0pt,
+            topsep=0pt}
+    \\let\\oldendbibenum\\endbibenum
+    \\def\\endbibenum{\\oldendbibenum\\vspace{-.6\\baselineskip}}
+    \\let\\oldendbibsection\\endbibsection
+    \\def\\endbibsection{\\oldendbibsection\\vspace{-.6\\baselineskip}}
+    \\makeatother
+    
+    \\usepackage{fancyhdr,lastpage}
+    \\pagestyle{fancy}
+    \\pagestyle{empty}      % Uncomment this to get rid of page numbers
+    \\fancyhf{}\\renewcommand{\\headrulewidth}{0pt}
+    \\fancyfootoffset{\\marginparsep+\\marginparwidth}
+    \\newlength{\\footpageshift}
+    \\setlength{\\footpageshift}
+              {0.5\\textwidth+0.5\\marginparsep+0.5\\marginparwidth-2in}
+    \\lfoot{\\hspace{\\footpageshift}%
+           \\parbox{4in}{\\, \\hfill %
+                        \\arabic{page} of \\protect\\pageref*{LastPage} % +LP
+    %                    \\arabic{page}                               % -LP
+                        \\hfill \\,}}
+    
+    \\usepackage{color,hyperref}
+    \\definecolor{darkblue}{rgb}{0.0,0.0,1}
+    \\hypersetup{colorlinks,breaklinks,
+                linkcolor=darkblue,urlcolor=darkblue,
+                anchorcolor=darkblue,citecolor=darkblue}
+    
+    \\renewcommand{\\section}[1]{\\pagebreak[3]%
+        \\vspace{1.3\\baselineskip}%
+        \\phantomsection\\addcontentsline{toc}{section}{#1}%
+        \\noindent\\llap{\\scshape\\smash{\\parbox[t]{\\marginparwidth}{\\hyphenpenalty=10000\\raggedright #1}}}%
+        \\vspace{-\\baselineskip}\\par}
+    
+    \\newcommand*\\fixendlist[1]{%
+        \\expandafter\\let\\csname preFixEndListend#1\\expandafter\\endcsname\\csname end#1\\endcsname
+        \\expandafter\\def\\csname end#1\\endcsname{\\csname preFixEndListend#1\\endcsname\\vspace{-0.6\\baselineskip}}}
+    
+    \\let\\originalItem\\item
+    \\newcommand*\\fixouterlist[1]{%
+        \\expandafter\\let\\csname preFixOuterList#1\\expandafter\\endcsname\\csname #1\\endcsname
+        \\expandafter\\def\\csname #1\\endcsname{\\let\\oldItem\\item\\def\\item{\\pagebreak[2]\\oldItem}\\csname preFixOuterList#1\\endcsname}
+        \\expandafter\\let\\csname preFixOuterListend#1\\expandafter\\endcsname\\csname end#1\\endcsname
+        \\expandafter\\def\\csname end#1\\endcsname{\\let\\item\\oldItem\\csname preFixOuterListend#1\\endcsname}}
+    \\newcommand*\\fixinnerlist[1]{%
+        \\expandafter\\let\\csname preFixInnerList#1\\expandafter\\endcsname\\csname #1\\endcsname
+        \\expandafter\\def\\csname #1\\endcsname{\\let\\oldItem\\item\\let\\item\\originalItem\\csname preFixInnerList#1\\endcsname}
+        \\expandafter\\let\\csname preFixInnerListend#1\\expandafter\\endcsname\\csname end#1\\endcsname
+        \\expandafter\\def\\csname end#1\\endcsname{\\csname preFixInnerListend#1\\endcsname\\let\\item\\oldItem}}
+    
+    \\newlist{outerlist}{itemize}{3}
+        \\setlist[outerlist]{label=\\enskip\\textbullet,leftmargin=*}
+        \\fixendlist{outerlist}
+        \\fixouterlist{outerlist}
+    
+    \\newlist{lonelist}{itemize}{3}
+        \\setlist[lonelist]{label=\\enskip\\textbullet,leftmargin=*,partopsep=0pt,topsep=0pt}
+        \\fixendlist{lonelist}
+        \\fixouterlist{lonelist}
+    
+    \\newlist{innerlist}{itemize}{3}
+        \\setlist[innerlist]{label=\\enskip\\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+        \\fixinnerlist{innerlist}
+    
+    \\newlist{loneinnerlist}{itemize}{3}
+        \\setlist[loneinnerlist]{label=\\enskip\\textbullet,leftmargin=*,parsep=0pt,itemsep=0pt,topsep=0pt,partopsep=0pt}
+        \\fixendlist{loneinnerlist}
+        \\fixinnerlist{loneinnerlist}
+    
+    \\newcommand{\\blankline}{\\quad\\pagebreak[3]}
+    \\newcommand{\\halfblankline}{\\quad\\vspace{-0.5\\baselineskip}\\pagebreak[3]}
+    
+    \\usepackage{doi}
+    \\usepackage{url}
+    
+    
+    \\urlstyle{same}
+    \\providecommand*\\emaillink[1]{\\nolinkurl{#1}}
+    \\providecommand*\\email[1]{\\href{mailto:#1}{\\emaillink{#1}}}
+    
+    \\begin{document}
+    
+     {\\hspace*{-\\marginparsep minus \\marginparwidth}%
+    \\begin{minipage}[t]{\\textwidth+\\marginparwidth+\\marginparsep}%
+    \\centering
+    {\\LARGE \\bfseries {${CVdetails.name}}}\\\\ 
+    \\vspace{0.5cm} 
+    \\href{https://www.linkedin.com/in/${CVdetails.linkedin}}{LinkedIn}  \\hspace{1cm}
+    \\href{mailto:${CVdetails.email}}{Email}\\hspace{1cm}
+    \\text{+91 ${CVdetails.contact}} \\hspace{1cm}
+    \\href{https://github.com/${CVdetails.github}}{GitHub}
+    
+    \\rule{\\columnwidth}{1.2pt}
+    
+    \\vspace{0.2cm}
+    \\end{minipage}}
+    
+    
+    
+
+     \\vspace{0.2cm}
+    
+    \\section{Education}
+    
+    \\textbf{${CVdetails.specialisation}},
+    \\href{https://www.nmims.edu/}{NMIMS University}
+    \\hfill {${CVdetails.gradYear}}\\\\ CGPA: ${CVdetails.gpa}
+    
+    
+    \\section{Experience}
+    
+    
+    \\textbf{${intern[0].role}},
+    {${intern[0].company}}
+    \\hfill {${intern[0].duration} months}
+    \\begin{innerlist}
+    \\item {${intern[0].desc}}
+    
+    \\end{innerlist}
+    
+    
+    
+    
+    
+    
+    \\section{Projects}
+    
+    {${project[0].title}}
+    \\hfill {${project[0].duration} months}
+    \\begin{innerlist}
+    \\item {${project[0].desc}}
+    \\end{innerlist}
+    \\vspace{0.4cm}
+    
+
+    
+    
+    
+    
+    
+    \\section{Technical Skills}
+    
+    \\textbf{Programming Languages:}
+    {${CVdetails.lang}}
+    
+    \\textbf{Tools/Frameworks/Softwares:}
+    {${CVdetails.tools}}
+    
+    \\
+    
+   
+    
+
+    
+    \\section{Certifications}
+    
+    \\begin{innerlist}
+    
+    \\item {${certi[0].title}}
+    \\hfill {${certi[0].year}}
+    
+    \\end{innerlist}
+    
+    
+    \\vspace{0.1cm}
+    
+    \\section{Position of Responsibility}
+    \\textbf{${por[0].title || ""}},
+    \\hfill {${por[0].year || ""}}
+    \\begin{innerlist}
+    \\item {${por[0].desc || ""}}
+    
+    
+    \\end{innerlist}
+    
+    \\vspace{0.2cm}
+    
+    
+    
+    
+    
+    
+    \\end{document}`;
+    return latex
+}
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -393,10 +609,7 @@ app.post("/docs", userAuthentication, upload.single("file"), async (req, res) =>
     }
     else {
         res.send("Resource Already exists")
-
     }
-
-
 });
 
 app.post('/admin/trainings', async (req, res) => {
@@ -442,14 +655,14 @@ app.post('/chatbot', async (req, res) => {
     const result = await model.generateContent(prompt);
     const response = await result.response;
 
-    try{
+    try {
         const text = response.text();
         res.json({ reply: text });
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
-   
+
 
 })
 
@@ -457,6 +670,23 @@ app.post('/chatbot', async (req, res) => {
 
 app.post("/cvbuilder", (req, res) => {
     console.log(req.body)
+    const data = req.body;
+    const resumeTex = LatexGen(data);
+
+    const input = (resumeTex)
+    const output = fs.createWriteStream('output.pdf')
+    const pdf = latex(input)
+
+    const filepath = __dirname +  "/output.pdf";
+
+
+    pdf.pipe(output)
+    pdf.on('error', err => console.error(err))
+    pdf.on('finish', () => console.log('PDF generated!'))
+    res.setHeader("Content-Type", "application/pdf")
+    res.setHeader('Content-Disposition', 'inline; filename=output.pdf')
+    res.sendFile(filepath);
+
 })
 
 

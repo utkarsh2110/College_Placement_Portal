@@ -4,13 +4,27 @@ import { useEffect } from "react";
 
 
 export default function Docs() {
+    const[fileName, setFileName] = useState(null);
     const [file, setFile] = useState(null)
     const [sap, setSAP] = useState(null);
-    const [viewBtn, setviewBtn] = useState("none")
-    const [upload, setUploadbtn] = useState("block");
-    const[fileName, setFileName] = useState(null);
 
-    const [disableUpload, setDisable] = useState(false)
+    const [viewBtn1, setviewBtn1] = useState("none")
+    const [upload1, setUploadbtn1] = useState("block");
+    const [disableUpload1, setDU1] = useState(false)
+
+    const [viewBtn2, setviewBtn2] = useState("none")
+    const [upload2, setUploadbtn2] = useState("block");
+    const [disableUpload2, setDU2] = useState(false)
+
+    const [viewBtn3, setviewBtn3] = useState("none")
+    const [upload3, setUploadbtn3] = useState("block");
+    const [disableUpload3, setDU3] = useState(false)
+
+    const [viewBtn4, setviewBtn4] = useState("none")
+    const [upload4, setUploadbtn4] = useState("block");
+    const [disableUpload4, setDU4] = useState(false)
+
+
 
     const submit = async (event) => {
 
@@ -28,15 +42,49 @@ export default function Docs() {
                 "Authorization": "bearer " + localStorage.getItem("token")
             }
         });
-        setFileName(title)
-        setviewBtn("block")
-        setUploadbtn("none")
-    };
 
-    const handleX = (e)=>{
-        setviewBtn("none")
-        setUploadbtn("block")
-        setDU(false)
+        if(event.target[0].name == "cv"){
+            setviewBtn1("block")
+            setUploadbtn1("none")
+            setDU1(true)
+        }
+        else if(event.target[0].name ="lsm"){
+            setviewBtn2("block")
+            setUploadbtn2("none")
+            setDU2(true)
+        }
+        else if(event.target[0].name ="hsc"){
+            setviewBtn3("block")
+            setUploadbtn3("none")
+            setDU3(true)
+        }
+        else if(event.target[0].name ="ssc"){
+                setviewBtn4("block")
+                setUploadbtn4("none")
+                setDU4(true)
+            }
+    }
+
+
+    const handleX1 = (e)=>{
+        setviewBtn1("none")
+        setUploadbtn1("block")
+        setDU1(false)
+    }
+    const handleX2 = (e)=>{
+        setviewBtn2("none")
+        setUploadbtn2("block")
+        setDU2(false)
+    }
+    const handleX3 = (e)=>{
+        setviewBtn3("none")
+        setUploadbtn3("block")
+        setDU3(false)
+    }
+    const handleX4 = (e)=>{
+        setviewBtn4("none")
+        setUploadbtn4("block")
+        setDU4(false)
     }
 
     useEffect(() => {
@@ -88,11 +136,11 @@ export default function Docs() {
                 <div className="btn">
                     <form onSubmit={submit} className="btn">
                         <input type="file" id="Upload" name="cv" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}
-                            required disabled={disableUpload} />
+                            required disabled={disableUpload1} />
                         
-                        <button type="submit" name="cv" style={{display: upload}} className="upload-btn">UPLOAD</button>
-                        <button type="button"  name="cv" style={{display: viewBtn}} className="upload-btn" onClick={handleClick} >VIEW</button>
-                        <button type="button" name="cv" style={{display: viewBtn, fontSize: "20px"}} className="upload-btn" onClick={handleX}>x</button>
+                        <button type="submit" name="cv" style={{display: upload1}} className="upload-btn">UPLOAD</button>
+                        <button type="button"  name="cv" style={{display: viewBtn1}} className="upload-btn" onClick={handleClick} >VIEW</button>
+                        <button type="button" name="cv" style={{display: viewBtn1, fontSize: "20px"}} className="upload-btn" onClick={handleX1}>x</button>
                     </form>
                 </div>
 
@@ -102,10 +150,10 @@ export default function Docs() {
                 <div className="btn">
                     <form onSubmit={submit} className="btn">
                         <input type="file" id="Upload" name="lsm" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}
-                            required disabled={disableUpload} />
-                        <button type="submit" name="lsm" style={{display: upload}} className="upload-btn">UPLOAD</button>
-                        <button  name="lsm" className="upload-btn"  style ={{display: viewBtn}}>VIEW</button>
-                        <button type="button" name="lsm" style={{display: viewBtn, fontSize: "20px"}} className="upload-btn" onClick={handleX}>x</button>
+                            required disabled={disableUpload2} />
+                        <button type="submit" name="lsm" style={{display: upload2}} className="upload-btn">UPLOAD</button>
+                        <button  name="lsm" className="upload-btn"  style ={{display: viewBtn2}} onClick={handleClick}>VIEW</button>
+                        <button type="button" name="lsm" style={{display: viewBtn2, fontSize: "20px"}} className="upload-btn" onClick={handleX2}>x</button>
                     </form>
                 </div>
 
@@ -116,10 +164,10 @@ export default function Docs() {
                 <div className="btn">
                     <form onSubmit={submit} className="btn">
                         <input type="file" id="Upload" name="HSC" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}
-                            required  disabled={disableUpload} />
-                        <button type="submit" name="HSC" style={{display: upload}} className="upload-btn">UPLOAD</button>
-                        <button  name="HSC" className="upload-btn"  style ={{display: viewBtn}}>VIEW</button>
-                        <button type="button" name="HSC" style={{display: viewBtn, fontSize: "20px"}} className="upload-btn" onClick={handleX}>x</button>
+                            required  disabled={disableUpload3} />
+                        <button type="submit" name="HSC" style={{display: upload3}} className="upload-btn">UPLOAD</button>
+                        <button  name="HSC" className="upload-btn"  style ={{display: viewBtn3}} onClick={handleClick}>VIEW</button>
+                        <button type="button" name="HSC" style={{display: viewBtn3, fontSize: "20px"}} className="upload-btn" onClick={handleX3}>x</button>
                     </form>
                 </div>
 
@@ -130,10 +178,10 @@ export default function Docs() {
                 <div className="btn">
                     <form onSubmit={submit} className="btn">
                         <input type="file" id="Upload" name="SSC" accept="application/pdf" onChange={(e) => setFile(e.target.files[0])}
-                            required disabled={disableUpload} />
-                        <button type="submit" name="SSC" style={{display: upload}} className="upload-btn">UPLOAD</button>
-                        <button  name="SSC" className="upload-btn"  style ={{display: viewBtn}}>VIEW</button>
-                        <button type="button" name="SSC" style={{display: viewBtn, fontSize: "20px"}} className="upload-btn" onClick={handleX}>x</button>
+                            required disabled={disableUpload4} />
+                        <button type="submit" name="SSC" style={{display: upload4}} className="upload-btn">UPLOAD</button>
+                        <button  name="SSC" className="upload-btn"  style ={{display: viewBtn4}} onClick={handleClick}> VIEW</button>
+                        <button type="button" name="SSC" style={{display: viewBtn4, fontSize: "20px"}} className="upload-btn" onClick={handleX4}>x</button>
                     </form>
                 </div>
             </div>
