@@ -395,7 +395,7 @@ export default function CVBulider() {
                                     </div>
                                     <div className="buttons">
                                         <button className="del" onClick={() => handleIntDelete(index)}>Delete</button>
-                                        {/* <button className="add" onClick={()=>addInternshipData(index)}>ADD</button> */}
+                                        <button className="add" >ADD</button>
                                     </div>
                                     <br /> <br />
                                 </>
@@ -625,7 +625,7 @@ export default function CVBulider() {
                     <button className="saveDetails">Save Details</button>
                     <button type="submit" className="submit" onClick={() => {
 
-                        if(Object.values())
+                        if(Object.values)
                         fetch("http://localhost:3000/cvbuilder", {
                             method: "POST",
                             body: JSON.stringify({

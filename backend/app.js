@@ -9,10 +9,18 @@ const cors = require('cors');
 const multer = require('multer')
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 require('dotenv').config();
+const selflatex = require('node-latex-pdf');
+ 
+selflatex(__dirname + '/resume.tex', __dirname + '/files/', (err,msg) => {
+    if(err)
+      console.log(`Error, ${msg}`);
+    else
+      console.log(`Success! ${msg}`);
+});
 
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
 let secret = fs.readFileSync("./secretKey.txt", 'utf-8')
 
@@ -143,10 +151,10 @@ const TrainingSchema = new mongoose.Schema({
 
 const MaterialSchema = new mongoose.Schema({
     company: String,
-    role: String, 
+    role: String,
     desc: String,
     type: String,
-    url: String   
+    url: String
 })
 
 
@@ -236,12 +244,12 @@ app.post('/recoverPass', async (req, res) => {
 app.patch("/changePass", userAuthentication, async (req, res) => {
     const { sapid, currPass, newPass } = req.body;
     let pass = jwt.sign(currPass, secret);
-    const std = await Student.findOne({sapid, password: pass });
+    const std = await Student.findOne({ sapid, password: pass });
     if (std) {
         let password = jwt.sign(newPass, secret);
         const { firstName, lastName, email, sapid } = std;
-        const updated = {firstName, lastName, email, password, sapid};
-        let updatedStd = await Student.findOneAndUpdate({sapid}, {password});
+        const updated = { firstName, lastName, email, password, sapid };
+        let updatedStd = await Student.findOneAndUpdate({ sapid }, { password });
         console.log(updatedStd)
         let token = jwt.sign({ sapid, currPass }, secret);
         res.json(token);
@@ -288,7 +296,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/home", userAuthentication, async (req, res) => {
-    
+
     const trainings = await Training.find();
     res.json({
         sapid: req.user.sapid,
@@ -312,13 +320,13 @@ app.get("/askAdmin", userAuthentication, async (req, res) => {
 })
 
 app.get("/admin/queries", async (req, res) => {
-    const queries = await Query.find({resolved: false});
-    if(queries){
+    const queries = await Query.find({ resolved: false });
+    if (queries) {
         res.json({
             queries
         })
     }
-    else{
+    else {
         res.send("No Queries to be resolved")
     }
 })
@@ -327,18 +335,18 @@ app.post("/admin/queries", async (req, res) => {
 })
 
 app.post("/askAdmin", userAuthentication, async (req, res) => {
-   console.log("hello");
-   const {sapid, query} = req.body;
-   const q = await Query.findOne({sapid, query, resolved: false});
-   console.log(req.body)
-   if(q){
-        res.json({"Resp":"Query Exists Already"})
-   }
-   else{
-        const newQuery = new Query({sapid, query, resolved: false});
+    console.log("hello");
+    const { sapid, query } = req.body;
+    const q = await Query.findOne({ sapid, query, resolved: false });
+    console.log(req.body)
+    if (q) {
+        res.json({ "Resp": "Query Exists Already" })
+    }
+    else {
+        const newQuery = new Query({ sapid, query, resolved: false });
         await newQuery.save();
-        res.json({"Resp": "Query Submitted"})
-   }
+        res.json({ "Resp": "Query Submitted" })
+    }
 
 })
 
@@ -350,7 +358,7 @@ app.get("/profile", userAuthentication, async (req, res) => {
 })
 
 app.get('/files/:fileName', userAuthentication, (req, res) => {
-    
+
     const fileName = req.params.fileName;
     console.log(fileName)
     const filepath = __dirname + "/files/" + fileName + ".pdf";
@@ -370,8 +378,8 @@ app.get("/cvbuilder", userAuthentication, async (req, res) => {
 
 app.get("/docs", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid: req.user.sapid });
-    if(std){
-        res.json({sapid: std.sapid})
+    if (std) {
+        res.json({ sapid: std.sapid })
     }
 })
 
@@ -391,55 +399,63 @@ app.post("/docs", userAuthentication, upload.single("file"), async (req, res) =>
 
 });
 
-app.post('/admin/trainings', async (req, res)=>{
-    const {title, date, venue, time, desc} = req.body;
+app.post('/admin/trainings', async (req, res) => {
+    const { title, date, venue, time, desc } = req.body;
     console.log(venue)
-    const train  = await Training.findOne({title, date, venue, time, desc});
-    if(train){
+    const train = await Training.findOne({ title, date, venue, time, desc });
+    if (train) {
         res.sendStatus(403);
     }
-    else{
-        const newTraining = new Training({title, date, venue, time, desc});
+    else {
+        const newTraining = new Training({ title, date, venue, time, desc });
         await newTraining.save();
         res.sendStatus(200);
     }
 });
 
-app.post('/admin/addPrep', async (req, res)=>{
-    const {company, role, desc, type, url} = req.body;
-    const material  = await Material.findOne({company, role, desc, type, url});
-    if(material){
+app.post('/admin/addPrep', async (req, res) => {
+    const { company, role, desc, type, url } = req.body;
+    const material = await Material.findOne({ company, role, desc, type, url });
+    if (material) {
         res.sendStatus(403);
     }
-    else{
-        const newMaterial =  new Material({company, role, desc, type, url});
+    else {
+        const newMaterial = new Material({ company, role, desc, type, url });
         await newMaterial.save();
         res.sendStatus(200);
     }
 });
 
-app.get('/admin/students', async (req,res)=>{
+app.get('/admin/students', async (req, res) => {
     const students = await Student.find();
-    if(students){
-        res.json({students})
+    if (students) {
+        res.json({ students })
     }
-    else{
+    else {
         res.sendStatus(404);
     }
 })
 
 
-app.post('/chatbot', async (req, res)=>{
-    const {prompt}  = req.body;
+app.post('/chatbot', async (req, res) => {
+    const { prompt } = req.body;
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    const text = response.text();
-    res.json({reply: text});
+
+    try{
+        const text = response.text();
+        res.json({ reply: text });
+    }
+    catch(err){
+        console.log(err)
+    }
+   
+
 })
 
 
 
-app.post("/cvbuilder", (req, res)=>{
+app.post("/cvbuilder", (req, res) => {
     console.log(req.body)
 })
 

@@ -17,7 +17,9 @@ export default function Chatbot() {
 
     const [btnIcon, setbtnIcon] = useState(chabotIcon);
 
-    const [overflow, setOverFlow] = useState("scroll")
+    const [overflow, setOverFlow] = useState("scroll");
+
+    const [disableBtn, setDisable] = useState(false);
 
     const [prompt, setText] = useState("")
 
@@ -94,6 +96,7 @@ export default function Chatbot() {
                                 if (prompt) {
                                     setPrompts((prevValue) => [...prevValue, prompt]);
                                     setMsg("")
+                                    setDisable(true)
                                     fetch('http://localhost:3000/chatbot', {
                                         method: 'POST',
                                         body: JSON.stringify({
@@ -107,12 +110,13 @@ export default function Chatbot() {
                                             if(data.reply){
                                                 setBotTxt((prev)=>[...prev, data.reply])
                                                 setMsg(null)
+                                                setDisable(false)
                                             }
                                         })
                                     })
 
                                 }
-                            }}><img src={send} width="20px"  /></button>
+                            }} disabled={disableBtn}><img src={send} width="20px"  /></button>
                         </div>
                     </div>
                 </div>
