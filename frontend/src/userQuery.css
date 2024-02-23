@@ -9,9 +9,11 @@
 .user-query-template{
     width: 200px;
     height: 200px;
-    border-radius: 10px;
+    border-radius: 7px;
     background-color: #f1f1f1;
     padding: 1em 1em 0;
+    border: 2px solid #e2e2e2;    
+
 }
 .user-grid{
     display: grid;
