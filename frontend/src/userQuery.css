@@ -1,0 +1,32 @@
+.user-query-h1{
+    font-size: 24px;
+    font-weight: bold;
+}
+.user-query-div{
+    margin: 2em 5em;
+}
+
+.user-query-template{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    padding: 1em 1em 0;
+}
+.user-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 1em;
+}
+.user-query{
+    height: 50%;
+    font-weight: bold;
+}
+
+
+.user-query-ans{
+    color: #8f2e23;
+    font-weight: bold;
+    
+}

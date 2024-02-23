@@ -23,7 +23,7 @@ export default function Login() {
             else{
             resp.json().then((data)=>{
                 if(data){
-                    window.location('/login')
+                    
                 }
             })
             };

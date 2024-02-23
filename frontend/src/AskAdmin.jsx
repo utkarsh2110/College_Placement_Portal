@@ -19,6 +19,7 @@ export default function AskAdmin() {
             if (!resp.ok) window.location = '/login'
             resp.json().then((data) => {
                 setSapid(data.sapid.sapid);
+              
             });
 
         })

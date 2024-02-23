@@ -1,5 +1,4 @@
 import "./cv.css"
-import "./script.js"
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -289,7 +288,7 @@ return (
 
                 <div className="course">
                     <p>Contact Number</p>
-                    <input type="tel" maxLength={10} name="contact" autoComplete="off" onChange={handleChange} />
+                    <input type="tel" maxLength={10} name="contact" autoComplete="off" onB={handleChange} />
                 </div>
 
 

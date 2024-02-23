@@ -73,7 +73,7 @@ export default function Chatbot() {
 
     const location = window.location.pathname;
 
-    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin' || location == '/faq')) {
+    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin' || location == '/faq' || location =='/queries')) {
         return (
             <>
                 <div className="chatbot" >

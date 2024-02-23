@@ -26,6 +26,7 @@ import AskAdmin from './AskAdmin'
 import ResolveQueries from '../admin/ResolveQueries'
 import AddCompanies from '../admin/addCompanies'
 import FAQ from './faq'
+import YourQueries from './YourQueries'
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
               <Route path='/Docs' element={<Docs />} />
               <Route path='/preparation' element={<Preparation />} />
               <Route path='/askAdmin' element={<AskAdmin />} />
+              <Route path='/queries' element={<YourQueries />} />
               <Route path='/register' element={<Register />} />
               <Route path='/Profile' element={<Profile />} />
               <Route path='/faq' element={<FAQ />} />

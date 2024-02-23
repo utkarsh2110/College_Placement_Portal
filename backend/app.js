@@ -463,8 +463,7 @@ app.patch("/changePass", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid, password: pass });
     if (std) {
         let password = jwt.sign(newPass, secret);
-        const { firstName, lastName, email, sapid } = std;
-        const updated = { firstName, lastName, email, password, sapid };
+        const {sapid } = std;
         let updatedStd = await Student.findOneAndUpdate({ sapid }, { password });
         console.log(updatedStd)
         let token = jwt.sign({ sapid, currPass }, secret);
@@ -546,15 +545,19 @@ app.get("/admin/queries", async (req, res) => {
         res.send("No Queries to be resolved")
     }
 })
-app.post("/admin/queries", async (req, res) => {
-    console.log(req.body)
-})
+app.patch("/admin/queries", async (req, res) => {
+    const {id, ans} = req.body;
+    const query = await Query.findOne({_id: id});
+    if(query){
+        const ogquery = query.query + "!@#anstoYourQuery" + ans;
+        const newQuery = await Query.findOneAndUpdate({_id:id}, {query: ogquery, resolved: true})
+        console.log(newQuery);
+        res.sendStatus(200)
+}})
 
 app.post("/askAdmin", userAuthentication, async (req, res) => {
-    console.log("hello");
     const { sapid, query } = req.body;
     const q = await Query.findOne({ sapid, query, resolved: false });
-    console.log(req.body)
     if (q) {
         res.json({ "Resp": "Query Exists Already" })
     }
@@ -563,7 +566,12 @@ app.post("/askAdmin", userAuthentication, async (req, res) => {
         await newQuery.save();
         res.json({ "Resp": "Query Submitted" })
     }
+})
 
+app.get("/userQueries", userAuthentication, async (req, res)=>{
+    const {sapid} = req.user;
+    const query = await Query.find({sapid: sapid})
+    res.json({query});
 })
 
 app.get("/profile", userAuthentication, async (req, res) => {

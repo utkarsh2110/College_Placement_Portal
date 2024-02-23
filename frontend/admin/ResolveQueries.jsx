@@ -7,6 +7,7 @@ import { useState } from 'react';
 export default function ResolveQueries() {
 
     const [queries, setQuery] = useState([]);
+    const [ans, setAns] = useState(null);
 
     useEffect(() => {
         fetch("http://localhost:3000/admin/queries", {
@@ -35,15 +36,15 @@ export default function ResolveQueries() {
                     aria-label="maximum height"
                     placeholder="Answer to the query..."
                     id={ele._id}
+                    onChange={(e)=>setAns(e.target.value)}
                 />
                 <Button variant="contained" onClick={() => {
                     
                     fetch('http://localhost:3000/admin/queries', {
-                        method: "POST",
+                        method: "PATCH",
                         body: JSON.stringify({
                             id: ele._id,
                             ans: document.getElementById(ele._id).value
-    
                         }),
                         headers: {
                             "Content-Type": "application/json",
