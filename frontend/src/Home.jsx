@@ -49,7 +49,7 @@ export default function Home() {
                 
                     
                 </div>
-                <hr style={{color: "grey", opacity:"0.3"}}/>
+    
             </div>
     )
 }

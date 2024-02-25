@@ -674,6 +674,16 @@ app.post('/chatbot', async (req, res) => {
 
 })
 
+app.get("/admin/studentData", async (req, res)=>{
+    const students = await Student.find();
+    if(students){
+        res.json({students});
+    }
+    else{
+        res.sendStatus(404);
+    }
+})
+
 
 
 app.post("/cvbuilder", (req, res) => {

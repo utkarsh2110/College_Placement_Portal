@@ -12,7 +12,6 @@ export default function LeftMenuBar() {
         }).then((resp) => {
             resp.json().then((data) => {
                 if (data && data.query.length > 0) {
-                    console.log(data.query)
                     setQueryDisplay("block");
                     localStorage.setItem("query",  JSON.stringify(data.query))
                 }
@@ -24,7 +23,7 @@ export default function LeftMenuBar() {
     const location = window.location.pathname;
     if(location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/changePass" || location == "/profile" || location == '/askAdmin' || location == '/faq' || location == '/queries'){
     return (
-        <div className="menu">
+        <div className="menu" style={{fontWeight: "bold"}}>
             <div className="index menuItem"   onClick={()=>{navigate('/home');}}>Home</div>
             <div className="CVBulider menuItem"  onClick={()=>{navigate('/cvbuilder')}}>CV Builder</div>
             <div className="Docs menuItem" onClick={()=>{navigate('/docs')}}>Documents</div>

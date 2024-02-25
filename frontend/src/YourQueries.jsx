@@ -3,7 +3,6 @@ export default function YourQueries() {
     const storedQuery = JSON.parse(localStorage.getItem("query"));
     console.log(storedQuery)
     return (
-
         <div className="user-query-div">
             <h2 className='user-query-h1'>Your Queries</h2>
             <div className="user-grid">
@@ -18,18 +17,6 @@ export default function YourQueries() {
                 }
 
             </div>
-
-
-
-
-
-
-
-
         </div>
-
-
-
-
     )
 }

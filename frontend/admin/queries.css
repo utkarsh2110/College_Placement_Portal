@@ -1,6 +1,5 @@
 .main-query-container{
     height: 100%;
-    width: 80vw;
     margin-top: 1em;
     margin-left: 4em;
 }
@@ -11,7 +10,7 @@
 }
 .queries{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
     gap: 1em;
 }

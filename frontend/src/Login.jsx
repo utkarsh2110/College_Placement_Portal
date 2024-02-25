@@ -53,7 +53,6 @@ export default function Login() {
         transform: 'translate(-50%, -50%)',
         width: 400,
         bgcolor: 'background.paper',
-
         p: 4,
     };
 

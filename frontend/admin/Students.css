@@ -13,8 +13,10 @@
 }
 
 table{
-    width: 100%;
+    width: 96%;
     padding: 10px;  
+    border-collapse: collapse;
+    margin-left: 1em;
 }
 
 th{
@@ -27,7 +29,13 @@ td{
     font-size: 18px;
     padding: 10px;
     color: black;
+    text-align: center;
+    border-bottom: 4px solid white;
 }
+td:first-child{
+    text-align: left;
+}
+
 
 tr:nth-child(odd){
     background-color: #F8F8F8
@@ -36,8 +44,14 @@ tr:nth-child(even){
     background-color: #F1F1F1
 }
 
-th,tr{
+tr{
     border-radius: 5px;
+}
+th:first-child{
+    border-radius: 5px 0 0 5px;
+}
+th:last-child{
+    border-radius: 0px 5px 5px 0px;
 }
 
 .view{
