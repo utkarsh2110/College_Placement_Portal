@@ -10,7 +10,7 @@ export default function YourQueries() {
                     return (
                         <div className="user-query-template" key={index}>
                             <p className="user-query">{element.query.split("!@#anstoYourQuery")[0]}</p><br />
-                            <p className="user-query-ans">ANS: {element.query.split("!@#anstoYourQuery")[1] || "YET TO BE RESOLVED"}</p>
+                            <p className="user-query-ans">REPLY: {element.query.split("!@#anstoYourQuery")[1] || "YET TO BE RESOLVED"}</p>
                         </div>
                     )
                 })

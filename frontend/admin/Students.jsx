@@ -36,7 +36,7 @@ export default function Students() {
         bgcolor: 'background.paper',
         p: 4,
     };
-
+    
 
     const mapping = () => {
         return students.map((element, index) => (
@@ -123,7 +123,7 @@ export default function Students() {
                                 </div>
 
                                 <div className="cv">
-                                    <h3 style={{ fontSize: 15, marginBottom: 8, marginTop:20 }}>SSC Markshee5</h3>
+                                    <h3 style={{ fontSize: 15, marginBottom: 8, marginTop:20 }}>SSC Marksheet</h3>
                                     <div className="grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", columnGap: '3em' }}>
                                         <a href="#" style={{ fontSize: 14 }}>ssc.pdf</a>
                                         <p>Add Comments</p>
@@ -133,12 +133,6 @@ export default function Students() {
                                         </select>
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
 
                         </Box>
@@ -149,9 +143,6 @@ export default function Students() {
             </>
         ));
     };
-
-
-
 
     return (
         <div className="std-main">
@@ -175,10 +166,6 @@ export default function Students() {
                     {mapping()}
                 </tbody>
             </table>
-
-
-
-
         </div>
     )
 }
