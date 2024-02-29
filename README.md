@@ -40,6 +40,8 @@ To run this project, you will need to add the following environment variables to
 
 `API_KEY` : api key of gemini pro
 
+`SECRET_KEY`:  key used to encrypt user passwords
+
 `EMAIL` : the email through which emails are sent
 
 `EMAIL_PASS` : the app pass for nodemailer
