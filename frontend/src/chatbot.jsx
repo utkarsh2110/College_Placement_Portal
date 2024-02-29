@@ -62,6 +62,7 @@ export default function Chatbot() {
                         sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
                         children={localStorage.getItem("init")}   
                         className='user-avatar'
+                        
                         />
                     </div>
                 )
@@ -73,7 +74,7 @@ export default function Chatbot() {
 
     const location = window.location.pathname;
 
-    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin' || location == '/faq' || location =='/queries')) {
+    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin' || location == '/faq' || location =='/queries' || location == '/changePass')) {
         return (
             <>
                 <div className="chatbot" >

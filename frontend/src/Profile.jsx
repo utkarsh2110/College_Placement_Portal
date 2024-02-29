@@ -11,6 +11,8 @@ export default function Profile(){
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
 
+  
+
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -26,12 +28,28 @@ export default function Profile(){
                     setFname(data.sapid.firstName);
                     setLname(data.sapid.lastName);
                     setEmail(data.sapid.email);
-                
             });
             
         })
 
     },[]);
+
+
+
+    const prgmCode = () => {
+      
+        let pCode = parseInt(sapid/10000000);
+        console.log(pCode)
+        if(pCode == 7036)
+            return "B.Tech CSBS";
+        else if(pCode == 7047)
+            return "MBA Tech."
+        else    
+            return "B.Tech";
+    }
+
+
+  
 
 
 return (
@@ -51,7 +69,7 @@ return (
                 
                 <div className="profile--programme profile--detail">
                     <p>Programme: </p>&nbsp;&nbsp;
-                    <p>B.Tech Computer Science</p>
+                    <p>{prgmCode()}</p>
                 </div>
 
 

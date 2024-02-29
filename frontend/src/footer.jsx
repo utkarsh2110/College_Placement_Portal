@@ -14,6 +14,7 @@ export default function Footer(){
 				<ul>
 					<li><a href="">Mumbai</a></li>
 					<li><a href="">Bengaluru</a></li>
+					<li><a href="">Chandigarh</a></li>
 					<li><a href="">Shirpur</a></li>
 					<li><a href="">Hyderabad</a></li>
 					<li><a href="">Indore</a></li>

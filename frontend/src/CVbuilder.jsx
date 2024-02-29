@@ -244,9 +244,9 @@ export default function CVBulider() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
+                // const blob = await response.blob();
+                // const url = URL.createObjectURL(blob);
+                // window.open(url, '_blank');
             } catch (error) {
                 console.error('Error fetching file:', error);
             }
@@ -282,18 +282,18 @@ return (
                 </div>
 
                 <div className="g-url">
-                    <p>GitHub handle</p>
+                    <p>GitHub Handle</p>
                     <input type="text" name="github" id="GitHub" placeholder="https://github.com/xxxx" autoComplete="off" onChange={handleChange} />
                 </div>
 
                 <div className="course">
                     <p>Contact Number</p>
-                    <input type="tel" maxLength={10} name="contact" autoComplete="off" onB={handleChange} />
+                    <input type="tel" maxLength={10} name="contact" autoComplete="off" onChange={handleChange} />
                 </div>
 
 
                 <div className="specialisation">
-                    <p>Specialisation</p>
+                    <p>Programme & Specialisation</p>
                     <select name="specialisation" id="specialisation" autoComplete="off" onChange={handleChange}>
                         <option defaultValue={true} disabled>Select your specialisation</option>
                         <option id="ce">B.Tech in Computer Engineering </option>

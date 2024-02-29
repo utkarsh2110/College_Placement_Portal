@@ -2,8 +2,6 @@ import "./landing.css"
 import user1 from "./assets/user1.jpg"
 import user2 from "./assets/user2.jpg"
 import company from "./assets/company.webp"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTwitterSquare, faFacebookSquare, faYoutubeSquare } from '@fortawesome/free-brands-svg-icons'
 import nmimsLogo from "./assets/nmims.png"
 import Footer from "./footer"
 

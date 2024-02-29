@@ -21,6 +21,7 @@ export default function Login() {
         }).then((resp)=>{
             if(resp.ok) window.location = '/home'
             else{
+           
             resp.json().then((data)=>{
                 if(data){
                     
@@ -32,6 +33,7 @@ export default function Login() {
 
     },[]);
 
+    const [error, showError] = useState("none");
 
     const [eyeImg, seteyeImg] = useState(eyeOff);
     const [passType, setPassType] = useState("password");
@@ -85,6 +87,7 @@ export default function Login() {
                 </div>
                 <div className="login-sapid">
                     <TextField fullWidth label="SAPID" id="fullWidth" onChange={(e) => { setEmail(e.target.value) }} />
+                    <p className="error" style={{color: "red", fontSize: "small", fontFamily: "Arial", display: error}}>Username not Found</p>
                 </div>
 
 
@@ -100,6 +103,7 @@ export default function Login() {
                         />
                         <img className="login-eye" src={eyeImg} width="25px" onClick={viewPass} id="eye-btn" style={{ cursor: " pointer" }} />
                     </div>
+                    <p className="error" style={{color: "red", fontSize: "small", fontFamily: "Arial", display: error}}>Password not found</p>
                     <p className="login-text-forgot" onClick={handleOpen} style={{cursor: "pointer"}}>Forgot password?</p>
                     <Modal
                         open={open}
@@ -166,6 +170,8 @@ export default function Login() {
                                     "Content-type": "application/json"
                                 }
                             }).then((resp) => {
+                                if(!resp.ok) showError("inline")
+                                else{
                                 resp.json().then((data) => {
                                     
                                     localStorage.setItem("token", data.data);
@@ -175,8 +181,10 @@ export default function Login() {
                                     }
                                     else {
                                         window.location = '/login'
+                                       
                                     }
                                 });
+                            }
 
                             })
 
