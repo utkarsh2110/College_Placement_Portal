@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express')
-const {Student, Training, Material, Query } = require('../db')
+const {Student, Training, Material, Query, Doc } = require('../db')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const router = express.Router();
@@ -24,7 +24,7 @@ require('dotenv').config();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, `../files`)
+        cb(null, `./files`)
     },
     filename: function (req, file, cb) {
         cb(null, `${req.body.title}.pdf`)
