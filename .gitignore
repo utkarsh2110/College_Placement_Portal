@@ -1,6 +1,5 @@
 backend/node_modules
 backend/.env
-backend/secretKey.txt
 frontend/node_modules# Logs
 frontend/logs
 frontend/*.log
