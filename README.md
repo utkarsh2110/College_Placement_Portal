@@ -5,9 +5,9 @@ This project is developed for the students of NMIMS University. The students wer
 
 Some of which inlcudes: CV formatting, long wait hours as placement committee was understaffed. So, here comes the solution where a student can upload their documents online and the admin can verify it.
 
-Students won't have to wait for long in queue. There is a feature to build CV by just filling a form without any hassle. They can ask any doubt directly to admin or an query the chatbot.
+Students won't have to wait in long queues. There is a feature to build CV by just filling a form and students don't need to care about formatting. They can also ask any doubt directly to admin or an query the chatbot.
 
-This project also aims to decrease the load on the placement committee as admin will able to manage the documents of the students, verify tham and resolve student's query throught the web app itself.
+This project also aims to decrease the load on the placement committee as admin will able to manage the documents of the students, verify them and resolve student's query throught the web app itself.
 
 Admins can also add training details, preparation material and student can access the same through the website itself.
 
