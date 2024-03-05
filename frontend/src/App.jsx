@@ -1,32 +1,42 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Navbar from './Components/Navbar'
-import Home from './Home'
-import LeftMenuBar from './Components/LeftMenuBar'
-import CVBulider from './CVbuilder'
-import Docs from './Docs'
-import Profile from './Profile'
-import Landing from './Landing'
-import Login from './Login'
-import ChangePass from './ChangePass'
-import AdminHome from '../admin/admin_home'
-import AdminLogin from '../admin/Admin_login'
-import AddTrainings from '../admin/AddTrainings'
-import AdminLeftBar from './Components/AdminLeftbar'
-import Register from './register'
-import About from './About'
-import NotFound404 from './Components/NotFound404'
-import Preparation from './Preparation'
-import Contact from './Contact'
-import Chatbot from './chatbot'
-import { useState } from 'react'
-import AddPrep from '../admin/addPrep'
-import Students from '../admin/Students'
-import AskAdmin from './AskAdmin'
-import ResolveQueries from '../admin/ResolveQueries'
-import AddCompanies from '../admin/addCompanies'
-import FAQ from './faq'
-import YourQueries from './YourQueries'
+
+// import - Components
+import Navbar from './pages/Components/Navbar'
+import LeftMenuBar from './pages/Components/LeftMenuBar'
+import NotFound404 from './pages/Components/NotFound404'
+import AdminLeftBar from './pages/Components/AdminLeftbar'
+
+// import - user
+import Home from './pages/user/Home'
+import CVBulider from './pages/user/CVbuilder'
+import Docs from './pages/user/Docs'
+import Profile from './pages/user/Profile'
+import ChangePass from './pages/user/ChangePass'
+import Chatbot from './pages/user/chatbot'
+import AskAdmin from './pages/user/AskAdmin'
+import FAQ from './pages/user/faq'
+import YourQueries from './pages/user/YourQueries'
+import Preparation from './pages/user/Preparation'
+
+// import - admin
+import AdminHome from './pages/admin/admin_home'
+import AdminLogin from './pages/admin/Admin_login'
+import AddTrainings from './pages/admin/AddTrainings'
+import AddPrep from './pages/admin/addPrep'
+import Students from './pages/admin/Students'
+import ResolveQueries from './pages/admin/ResolveQueries'
+import AddCompanies from './pages/admin/addCompanies'
+
+// import - general pages
+import Landing from './pages/Landing'
+import Login from './pages//Login'
+import Register from './pages/register'
+import About from './pages/About'
+import Contact from './pages/Contact'
+
+
+
 
 function App() {
   return (
@@ -39,13 +49,15 @@ function App() {
           <div className="div">
             <Routes>
               <Route path='/' element={<Landing />} />
+              
               <Route path='/admin/login' element={<AdminLogin />} />
               <Route path='/admin/home' element={<AdminHome />} />
               <Route path='/admin/trainings' element={<AddTrainings />} />
               <Route path='/admin/preparation' element={<AddPrep />} />
               <Route path='/admin/queries' element={<ResolveQueries />} />
-              <Route path='/admin/companies' element={<AddCompanies/>} />
+              <Route path='/admin/companies' element={<AddCompanies />} />
               <Route path='/admin/students' element={<Students />} />
+
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='/contact' element={<Contact />} />
