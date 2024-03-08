@@ -1,7 +1,7 @@
 .card-parent{
     display: flex;
     flex-direction: column;
-    margin: 4em 35ch;
+    margin: 2em 35ch;
     background-color: #f8f8f8;
     border: 2px solid #f4f0f0;
     height: max-content;
@@ -27,4 +27,11 @@
     font-size: 28px;
     font-weight: bold;
     text-align: center;
+}
+
+.card-div-1{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
 }

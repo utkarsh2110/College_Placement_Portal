@@ -237,7 +237,6 @@ router.post('/chatbot', async (req, res) => {
 
 
 router.post("/cvbuilder", (req, res) => {
-    console.log(req.body)
     const data = req.body;
     const resumeTex = LatexGen(data);
 
@@ -254,8 +253,7 @@ router.post("/cvbuilder", (req, res) => {
     // res.setHeader("Content-Type", "application/pdf")
     // res.setHeader('Content-Disposition', 'inline; filename=output.pdf')
     // res.sendFile(filepath);
-
-})
+});
 
 
 module.exports = router;

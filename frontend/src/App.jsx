@@ -49,6 +49,10 @@ function App() {
           <div className="div">
             <Routes>
               <Route path='/' element={<Landing />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/about' element={<About />} />
               
               <Route path='/admin/login' element={<AdminLogin />} />
               <Route path='/admin/home' element={<AdminHome />} />
@@ -58,10 +62,6 @@ function App() {
               <Route path='/admin/companies' element={<AddCompanies />} />
               <Route path='/admin/students' element={<Students />} />
 
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
-              <Route path='/contact' element={<Contact />} />
-              <Route path='/about' element={<About />} />
               <Route path='/home' element={<Home />} />
               <Route path='/changePass' element={<ChangePass />} />
               <Route path='/cvbuilder' element={<CVBulider />} />
