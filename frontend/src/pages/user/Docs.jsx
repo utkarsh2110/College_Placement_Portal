@@ -127,7 +127,7 @@ export default function Docs() {
 
             <div className="headings">
                 <h2> Upload Scanned Documents </h2>
-                <p className="info">Only pdf/jpeg/jpg/png formats are allowed</p>
+                <p className="info">Only pdfs are allowed</p>
             </div>
 
             <div className="cv">

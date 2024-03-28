@@ -17,7 +17,7 @@ export default function addCompanies() {
     return (
 
         <div className='card-parent'>
-            <h2 id='training-header'>Add Training details</h2>
+            <h2 id='training-header'>Add Company details</h2>
             <div className="card">
                 <div className="card-div-1">
                     <TextField id="outlined-basic" label="Job Title" variant="outlined" 

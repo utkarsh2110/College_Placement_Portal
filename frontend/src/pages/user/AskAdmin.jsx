@@ -36,7 +36,6 @@ export default function AskAdmin() {
                     maxRows={4}
                     minRows={4}
                     className='txtarea'
-                    aria-label="maximum height"
                     placeholder="Ask your query..."
                     onChange={(e)=>{setQuery(e.target.value)}}
                 /> <br />
