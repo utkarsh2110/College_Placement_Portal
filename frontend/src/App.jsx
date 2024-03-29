@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // import - Components
 import Navbar from './pages/Components/Navbar'
-import LeftMenuBar from './pages/Components/LeftMenuBar'
+import LeftMenuBar from './pages/components/LeftMenuBar'
 import NotFound404 from './pages/Components/NotFound404'
 import AdminLeftBar from './pages/Components/AdminLeftbar'
 
@@ -18,6 +18,7 @@ import AskAdmin from './pages/user/AskAdmin'
 import FAQ from './pages/user/faq'
 import YourQueries from './pages/user/YourQueries'
 import Preparation from './pages/user/Preparation'
+import Companies from './pages/user/companies'
 
 // import - admin
 import AdminHome from './pages/admin/admin_home'
@@ -63,6 +64,7 @@ function App() {
               <Route path='/admin/students' element={<Students />} />
 
               <Route path='/home' element={<Home />} />
+              <Route path='/upcomingCompanies' element={<Companies />} />
               <Route path='/changePass' element={<ChangePass />} />
               <Route path='/cvbuilder' element={<CVBulider />} />
               <Route path='/Docs' element={<Docs />} />

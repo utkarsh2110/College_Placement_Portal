@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express')
-const { Admin, Student, Training, Material, Query } = require('../db')
+const { Admin, Student, Training, Material, Query, Company } = require('../db')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const secret = process.env.SECRET_KEY
@@ -56,6 +56,19 @@ router.post('/trainings', async (req, res) => {
         res.sendStatus(200);
     }
 });
+
+router.post("/addCompanies", async(req, res)=>{
+    const {name, title, desc, skills, ctc, deadline, addlInfo} = req.body
+    const company = await Company.findOne({name, title})
+    if(company){
+        res.send("Company Details Already Added");
+    }
+    else{
+        const newCompany = new Company({ name, title, desc, skills, ctc, deadline, addlInfo});
+        await newCompany.save();
+        res.sendStatus(200);
+    }
+ })
 
 router.post('/addPrep', async (req, res) => {
     const { company, role, desc, type, url } = req.body;

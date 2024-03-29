@@ -1,11 +1,13 @@
 import '../../styles/user/chatbot.css'
 import chabotIcon from '../../assets/chatbot.png'
 import send from '../../assets/send.png'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import down from '../../assets/down.svg'
 import Avatar from "@mui/material/Avatar"
 import { faDribbble } from '@fortawesome/free-brands-svg-icons'
 export default function Chatbot() {
+
+
 
     const [bottxt, setBotTxt] = useState(["Hello 👋🏻 I am PlacementPal , How can I assist you today?"])
     const [prompts, setPrompts] = useState([])
@@ -23,9 +25,9 @@ export default function Chatbot() {
 
     const [prompt, setText] = useState("")
 
-    
 
-   
+
+
     const view = () => {
         if (chatbot === "none") {
             viewChatbot("block")
@@ -36,33 +38,33 @@ export default function Chatbot() {
             setbtnIcon(chabotIcon)
         }
     }
-   
-    
+
+
     const chats = () => {
         const elements = [];
         const maxLength = Math.max(bottxt.length, prompts.length);
         for (let i = 0; i < maxLength; i++) {
             if (bottxt[i]) {
                 elements.push(
-                <div className='bot' key={`bot${i}`}>
-                    <Avatar
-                    sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
-                    src={chabotIcon}   
-                    className='bot-avatar'
-                    />
-                    <p className='bot-text'>{bottxt[i]}</p>
-                </div>
+                    <div className='bot' key={`bot${i}`}>
+                        <Avatar
+                            sx={{ bgcolor: "black", width: 24, height: 24, fontSize: 12 }}
+                            src={chabotIcon}
+                            className='bot-avatar'
+                        />
+                        <p className='bot-text'>{bottxt[i]}</p>
+                    </div>
                 );
             }
             if (prompts[i]) {
-                elements.push(  
+                elements.push(
                     <div className='user' key={`user${i}`}>
                         <p className='user-text'>{prompts[i]}</p>
                         <Avatar
-                        sx={{bgcolor: "black", width: 24, height: 24, fontSize: 12}} 
-                        children={localStorage.getItem("init")}   
-                        className='user-avatar'
-                        
+                            sx={{ bgcolor: "black", width: 24, height: 24, fontSize: 12 }}
+                            children={localStorage.getItem("init")}
+                            className='user-avatar'
+
                         />
                     </div>
                 )
@@ -74,7 +76,7 @@ export default function Chatbot() {
 
     const location = window.location.pathname;
 
-    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs'|| location == '/askAdmin' || location == '/faq' || location =='/queries' || location == '/changePass')) {
+    if (!location.includes('/admin') && (location == '/home' || location == '/cvbuilder' || location == '/preparation' || location == '/docs' || location == '/askAdmin' || location == '/faq' || location == '/queries' || location == '/changePass')) {
         return (
             <>
                 <div className="chatbot" >
@@ -98,18 +100,18 @@ export default function Chatbot() {
                                     setPrompts((prevValue) => [...prevValue, prompt]);
                                     setMsg("")
                                     setDisable(true)
+                                    const userInput = "User's input text";  // Get the user's input from your app
+
                                     fetch('http://localhost:3000/chatbot', {
                                         method: 'POST',
-                                        body: JSON.stringify({
-                                            prompt
-                                        }),
                                         headers: {
-                                            "Content-Type": "application/json"
-                                        }
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ prompt}),
                                     }).then((resp) => {
                                         resp.json().then(data => {
-                                            if(data.reply){
-                                                setBotTxt((prev)=>[...prev, data.reply])
+                                            if (data.reply) {
+                                                setBotTxt((prev) => [...prev, data.reply])
                                                 setMsg(null)
                                                 setDisable(false)
                                             }
@@ -117,7 +119,7 @@ export default function Chatbot() {
                                     })
 
                                 }
-                            }} disabled={disableBtn}><img src={send} width="20px"  /></button>
+                            }} disabled={disableBtn}><img src={send} width="20px" /></button>
                         </div>
                     </div>
                 </div>

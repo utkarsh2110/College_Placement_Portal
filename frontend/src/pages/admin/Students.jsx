@@ -37,16 +37,30 @@ export default function Students() {
         p: 4,
     };
     
+    const prgmCode = (sapid) => {
+      
+        let pCode = parseInt(sapid/10000000);
+        console.log(pCode)
+        if(pCode == 7036)
+            return "B.Tech CSBS";
+        else if(pCode == 7047)
+            return "MBA Tech."
+        else    
+            return "B.Tech";
+    }
 
     const mapping = () => {
         return students.map((element, index) => (
             <>
+            
+                
+            
                 <tr key={index}>
                     <td>{element.firstName + " " + element.lastName}</td>
                     <td>{element.sapid}</td>
                     <td>{element.school || "STME"}</td>
-                    <td>{element.course || "B.TECH CSBS"}</td>
-                    <td>{element.year || "4th"}</td>
+                    <td>{prgmCode(element.sapid)}</td>
+                    <td>{element.year || "Final"}</td>
                     <td>{element.placed || "Unplaced"}</td>
                     <button className="view" onClick={() => handleOpen(element)}>View</button>
                     <Modal
@@ -73,7 +87,7 @@ export default function Students() {
                                 </div>
                                 <div className="spans">
                                     <span style={{ fontSize: 16, color: "black" }}>Course : </span>
-                                    <span style={{ color: "black", fontSize: 15, marginLeft: 10, fontWeight: "100" }}>{element.course || "BTECH"}</span>
+                                    <span style={{ color: "black", fontSize: 15, marginLeft: 10, fontWeight: "100" }}>{prgmCode(element.sapid)}</span>
                                 </div>
                                 <div>
                                     <select style={{ width: "fit-content", height: 30, fontSize: 10, background: "#8f2e23", color: "white", border: "1px solid #8f2e23" }}>

@@ -101,6 +101,7 @@ export default function Register() {
                         }).then((resp) => {
                             if(resp.ok) window.location = '/login'
                             resp.json().then((data) => {
+                                
                             });
 
                         })

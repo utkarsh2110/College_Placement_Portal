@@ -17,7 +17,9 @@ export default function Navbar() {
     }
 
     const location = window.location.pathname;
-    if (location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/profile" || location == '/changePass' || location == '/askAdmin' || location == '/queries' || location == '/faq' || location.includes('/admin') && location != ('/admin/login')) {
+    if (location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/profile" || location == '/changePass' || location == '/askAdmin' || location == '/queries' || location == '/faq' || location.includes('/admin') && location != ('/admin/login' ) || location == "/upcomingCompanies") 
+    {
+
         if (location.includes('/admin') && location != ('/admin/login') && location != ('/admin')) {
             return (
                 <div className="titlebar">
@@ -52,7 +54,7 @@ export default function Navbar() {
 
 
 
-        if (location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/changePass" || location == "/profile" || location == '/askAdmin' || location == '/faq' || location == '/queries') {
+        if (location == '/home' || location == '/cvbuilder' || location == '/docs' || location == "/preparation" || location == "/changePass" || location == "/profile" || location == '/askAdmin' || location == '/faq' || location == '/queries' || location == "/upcomingCompanies") {
             return (
                 <div className="titlebar">
                     <div className="tbar-left">

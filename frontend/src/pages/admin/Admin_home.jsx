@@ -1,58 +1,55 @@
 import '../../styles/user/home.css'
 import { useState, useEffect } from 'react';
-import { scaleBand, scaleLinear } from 'd3';
+
 
 export default function Admin_home() {
-    const [data, setData] = useState(null);
-    useEffect(() => {
-        fetch("http://localhost:3000/admin/studentData").then((resp) => {
-            resp.json().then((data) => {
-                console.log(data)
-                setData(data.students)
 
-            });
-        });
-    }, []);
+    const [companies, setCompanies] = useState([])
+    const [sapid, setSapid] = useState(null);
 
-    // const yScale = scaleBand()
-    //     .domain(data.map(d => d.placed))
-    //     .range([0], height)
+    useEffect(()=>{
+        fetch("http://localhost:3000/companies",{
+            method: "GET",
+            headers: {
+               "Authorization": "bearer " + localStorage.getItem("token")
+            }
+        }).then((resp)=>{
+            if(!resp.ok) window.location = '/login'
+            else{
+            resp.json().then((data)=>{
+                setCompanies(data.companies)
+                setSapid(data.sapid)
+            })
+            };
+            
+        })
 
+    },[]);
 
-    // const xScale = scaleLinear()
-    //     .domain([0, max(data, d => d.length)])
-    //     .range([0, width])
 
     return (
 
         <div className="main">
             <div className="content">
-
-
+            
+               
                 <div className="admin-content--right">
-
+               
                     <div className="trainings">
                         <h2 className="training-heading">Upcoming Companies</h2>
+                        {companies.map((e)=>{
+                            return(
                         <div className="training-template">
-                            <h3 className="title">Infosys</h3>
+                            <h1 className="title">{e.name}</h1>
                             <div className="venue">
-                                <span className="venue" style={{ color: "black" }}>Students applied: X</span> <br />
-                                <span className="time" style={{ color: "black" }}>Deadline: </span>
+                                <span className="venue" style={{ color: "black" }}>Students applied: {e.Applied.length}</span> <br />
+                                <span className="time" style={{ color: "black" }}>Deadline: {e.deadline} </span>
                             </div>
                             <button className="admin-details-btn">View Details</button>
                         </div>
-
-                        <div className="training-template">
-                            <h3 className="title">TCS</h3>
-                            <div className="venue">
-                                <span className="venue" style={{ color: "black" }}>Students applied: X </span> <br />
-
-                                <span className="time" style={{ color: "black" }}>Deadline: </span>
-                            </div>
-                            <button className="admin-details-btn">View Details</button>
-                        </div>
-
+                        )})}
                     </div>
+                   
 
                     <div className="data">
                         {/* {

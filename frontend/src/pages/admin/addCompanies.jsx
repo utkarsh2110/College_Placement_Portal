@@ -38,16 +38,16 @@ export default function addCompanies() {
 
                 <Button variant="contained" onClick={() => {
 
-                    fetch('http://localhost:3000/admin/companies', {
+                    fetch('http://localhost:3000/admin/addCompanies', {
                         method: "POST",
                         body: JSON.stringify({
                             title,
                             name,
-                            jd,
+                            desc: jd,
                             skills,
-                            salary,
+                            ctc: salary,
                             deadline,
-                            addtl
+                            addlInfo: addtl
                         }),
                         headers: {
                             "Content-Type": "application/json"

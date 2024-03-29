@@ -28,3 +28,19 @@
     font-weight: bold;
     text-align: center;
 }
+.txtarea{
+    width: 95.3%;
+    border-radius: 5px;
+    resize: none;
+    background-color: #f8f8f8;
+
+    border: 1px solid #9f9d9d;
+}
+
+.txtarea:focus{
+    outline: none;
+    border: 1px solid #9f9d9d;
+    width: 94.6%;
+    resize: none;
+    box-shadow: none;
+}

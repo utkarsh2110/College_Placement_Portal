@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 const express = require('express')
-const {Student, Training, Material, Query, Doc } = require('../db')
+const { Student, Training, Material, Query, Doc, Company } = require('../db')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const router = express.Router();
 const fs = require('fs')
 const multer = require('multer')
 
-const {userAuthentication, secret} = require('../middleware/auth')
+const { userAuthentication, secret } = require('../middleware/auth')
 
 const latex = require('node-latex')
 const LatexGen = require('../resume.js')
-const {sendMail, recoverPass} = require('../email/email')
+const { sendMail, recoverPass } = require('../email/email')
 
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -59,6 +59,22 @@ router.get("/preparation", userAuthentication, async (req, res) => {
     })
 })
 
+router.get("/companies", userAuthentication, async (req, res) => {
+    const companies = await Company.find();
+    res.json({
+        sapid: req.user.sapid,
+        companies
+    })
+})
+
+router.patch("/companies", userAuthentication, async (req, res) => {
+    const { sapid } = req.body;
+    let updatedStd = await Company.findOneAndUpdate({ sapid }, {a});
+    console.log(updatedStd)
+    let token = jwt.sign({ sapid, currPass }, secret);
+    res.json(token);
+})
+
 router.post("/register", async (req, res) => {
     const { fname, lname, email, pass, sapid } = req.body;
     let pass1 = jwt.sign(pass, secret);
@@ -95,7 +111,7 @@ router.patch("/changePass", userAuthentication, async (req, res) => {
     const std = await Student.findOne({ sapid, password: pass });
     if (std) {
         let password = jwt.sign(newPass, secret);
-        const {sapid } = std;
+        const { sapid } = std;
         let updatedStd = await Student.findOneAndUpdate({ sapid }, { password });
         console.log(updatedStd)
         let token = jwt.sign({ sapid, currPass }, secret);
@@ -163,10 +179,10 @@ router.post("/askAdmin", userAuthentication, async (req, res) => {
     }
 })
 
-router.get("/userQueries", userAuthentication, async (req, res)=>{
-    const {sapid} = req.user;
-    const query = await Query.find({sapid: sapid})
-    res.json({query});
+router.get("/userQueries", userAuthentication, async (req, res) => {
+    const { sapid } = req.user;
+    const query = await Query.find({ sapid: sapid })
+    res.json({ query });
 })
 
 router.get("/profile", userAuthentication, async (req, res) => {
@@ -220,9 +236,9 @@ router.post("/docs", userAuthentication, upload.single("file"), async (req, res)
 
 router.post('/chatbot', async (req, res) => {
     const { prompt } = req.body;
+    console.log(prompt)
     const result = await model.generateContent(prompt);
     const response = await result.response;
-
     try {
         const text = response.text();
         res.json({ reply: text });
@@ -244,7 +260,7 @@ router.post("/cvbuilder", (req, res) => {
     const output = fs.createWriteStream('output.pdf')
     const pdf = latex(input)
 
-    const filepath = __dirname +  "/output.pdf";
+    const filepath = __dirname + "/output.pdf";
 
 
     pdf.pipe(output)

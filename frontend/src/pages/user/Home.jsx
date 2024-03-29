@@ -6,6 +6,7 @@ import Trainings from './trainings.jsx';
 
 export default function Home() {
     const [training, setTraining] = useState([]);
+    
     useEffect(()=>{
         fetch("http://localhost:3000/home",{
             method: "GET",

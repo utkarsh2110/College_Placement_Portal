@@ -1,5 +1,18 @@
 const mongoose = require('mongoose');
 
+
+const companySchema = new mongoose.Schema({
+    name: String,
+    title: String,
+    desc: String,
+    skills: String,
+    ctc: Number,
+    deadline: String,
+    addlInfo: String,
+    Applied: {type: [Number], unique: true}
+})
+
+
 const PDFSchema = new mongoose.Schema({
     pdf: String
 });
@@ -57,6 +70,7 @@ const Student = mongoose.model('Student', studentSchema);
 const Training = mongoose.model('Trainings', TrainingSchema);
 const Material = mongoose.model('Material', MaterialSchema);
 const Query = mongoose.model('Query', querySchema);
+const Company = mongoose.model('Company', companySchema);
 
 module.exports={
     Doc,
@@ -65,4 +79,5 @@ module.exports={
     Training,
     Material,
     Query,
+    Company
 }
