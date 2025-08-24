@@ -52,4 +52,5 @@ To run this project, you will need to add the following environment variables to
 i.  You  can get the gemini pro api-key through google ai studio\
 ii. Don't use your gmail pass as it will not work.\
 iii. Get the app password for nodemailer by turning on 2FA in email settings.
+
 iv. Add your .env file in the backend folder
